@@ -1,0 +1,291 @@
+{
+  "theme": "institutional_dark_and_light",
+  "default_mode": "dark",
+  "typography": {
+    "font_family_heading": "IBM Plex Sans, sans-serif",
+    "font_family_body": "IBM Plex Sans, sans-serif",
+    "font_family_mono": "IBM Plex Mono, monospace",
+    "font_import": "@import \"@fontsource/ibm-plex-sans\";\n@import \"@fontsource/ibm-plex-mono\";",
+    "scale_px": {
+      "display": 56,
+      "h1": 40,
+      "h2": 28,
+      "h3": 20,
+      "h4": 16,
+      "body": 15,
+      "caption": 13
+    },
+    "rules": {
+      "h1": "font-semibold tracking-tight text-foreground leading-tight text-3xl sm:text-4xl lg:text-[40px]",
+      "h2": "font-semibold tracking-tight text-foreground text-2xl sm:text-3xl border-b border-border/40 pb-2 mt-8 mb-4",
+      "h3": "font-medium tracking-tight text-foreground text-lg sm:text-xl mt-6 mb-3",
+      "body": "text-[15px] leading-relaxed text-muted-foreground font-normal max-w-[75ch]",
+      "code": "font-mono text-xs sm:text-[13px] leading-normal px-1.5 py-0.5 rounded bg-muted text-foreground border border-border/50",
+      "spec_meta_label": "font-mono text-[11px] uppercase tracking-[0.15em] text-muted-foreground font-semibold"
+    }
+  },
+  "colors": {
+    "surfaces": [
+      {
+        "name": "page",
+        "kind": "solid",
+        "bg": "#0B0F17",
+        "on_bg": "#F1F5F9",
+        "on_bg_muted": "#94A3B8"
+      },
+      {
+        "name": "panel",
+        "kind": "solid",
+        "bg": "#111827",
+        "on_bg": "#F8FAFC",
+        "on_bg_muted": "#94A3B8"
+      },
+      {
+        "name": "sidebar",
+        "kind": "solid",
+        "bg": "#0E131F",
+        "on_bg": "#E2E8F0",
+        "on_bg_muted": "#64748B"
+      },
+      {
+        "name": "code_block",
+        "kind": "solid",
+        "bg": "#070A10",
+        "on_bg": "#E2E8F0",
+        "on_bg_muted": "#64748B"
+      },
+      {
+        "name": "status_implemented",
+        "kind": "solid",
+        "bg": "#064E3B",
+        "on_bg": "#A7F3D0",
+        "on_bg_muted": "#6EE7B7"
+      },
+      {
+        "name": "status_partial",
+        "kind": "solid",
+        "bg": "#1E3A8A",
+        "on_bg": "#BFDBFE",
+        "on_bg_muted": "#93C5FD"
+      },
+      {
+        "name": "status_defined",
+        "kind": "solid",
+        "bg": "#4C1D95",
+        "on_bg": "#DDD6FE",
+        "on_bg_muted": "#C4B5FD"
+      },
+      {
+        "name": "status_referenced",
+        "kind": "solid",
+        "bg": "#164E63",
+        "on_bg": "#A5F3FC",
+        "on_bg_muted": "#67E8F9"
+      },
+      {
+        "name": "status_private",
+        "kind": "solid",
+        "bg": "#334155",
+        "on_bg": "#CBD5E1",
+        "on_bg_muted": "#94A3B8"
+      },
+      {
+        "name": "status_proposed",
+        "kind": "solid",
+        "bg": "#78350F",
+        "on_bg": "#FDE68A",
+        "on_bg_muted": "#FCD34D"
+      },
+      {
+        "name": "status_unknown",
+        "kind": "solid",
+        "bg": "#451A03",
+        "on_bg": "#FED7AA",
+        "on_bg_muted": "#FDBA74"
+      },
+      {
+        "name": "severity_critical",
+        "kind": "solid",
+        "bg": "#7F1D1D",
+        "on_bg": "#FECACA",
+        "on_bg_muted": "#FCA5A5"
+      },
+      {
+        "name": "severity_high",
+        "kind": "solid",
+        "bg": "#9A3412",
+        "on_bg": "#FED7AA",
+        "on_bg_muted": "#FDBA74"
+      },
+      {
+        "name": "severity_medium",
+        "kind": "solid",
+        "bg": "#854D0E",
+        "on_bg": "#FEF08A",
+        "on_bg_muted": "#FDE047"
+      },
+      {
+        "name": "severity_low",
+        "kind": "solid",
+        "bg": "#14532D",
+        "on_bg": "#BBF7D0",
+        "on_bg_muted": "#86EFAC"
+      },
+      {
+        "name": "severity_optional",
+        "kind": "solid",
+        "bg": "#312E81",
+        "on_bg": "#C7D2FE",
+        "on_bg_muted": "#A5B4FC"
+      }
+    ],
+    "accent": "#0284C7",
+    "on_accent": "#FFFFFF",
+    "semantic_status_map": {
+      "IMPLEMENTED": {
+        "badge_class": "bg-emerald-950/80 text-emerald-300 border-emerald-800/60 font-mono text-[11px]",
+        "border_class": "border-l-4 border-l-emerald-500",
+        "dot_class": "bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.5)]",
+        "description": "Fully realized in repo code with verified working implementation."
+      },
+      "PARTIAL": {
+        "badge_class": "bg-sky-950/80 text-sky-300 border-sky-800/60 font-mono text-[11px]",
+        "border_class": "border-l-4 border-l-sky-500",
+        "dot_class": "bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.5)]",
+        "description": "Code exists but incomplete, missing subsystems, or unlinked."
+      },
+      "DEFINED": {
+        "badge_class": "bg-purple-950/80 text-purple-300 border-purple-800/60 font-mono text-[11px]",
+        "border_class": "border-l-4 border-l-purple-500",
+        "dot_class": "bg-purple-400 shadow-[0_0_8px_rgba(192,132,252,0.5)]",
+        "description": "Architecturally formalized, typed, or schema-specified; no runtime implementation yet."
+      },
+      "REFERENCED": {
+        "badge_class": "bg-cyan-950/80 text-cyan-300 border-cyan-800/60 font-mono text-[11px]",
+        "border_class": "border-l-4 border-l-cyan-500",
+        "dot_class": "bg-cyan-400",
+        "description": "Named and called in comments, imports, or docs, but external or unprovided."
+      },
+      "PRIVATE / NOT VISIBLE": {
+        "badge_class": "bg-slate-900/90 text-slate-300 border-slate-700/70 font-mono text-[11px]",
+        "border_class": "border-l-4 border-l-slate-500",
+        "dot_class": "bg-slate-400",
+        "description": "Known institutional component residing in private enterprise repositories."
+      },
+      "PROPOSED": {
+        "badge_class": "bg-amber-950/80 text-amber-300 border-dashed border-amber-600/70 font-mono text-[11px]",
+        "border_class": "border-l-4 border-dashed border-l-amber-500",
+        "dot_class": "bg-amber-400 ring-2 ring-amber-500/30",
+        "description": "Target architecture RFC / specification item. MUST NEVER be styled as an existing capability."
+      },
+      "UNKNOWN": {
+        "badge_class": "bg-orange-950/80 text-orange-300 border-orange-800/60 font-mono text-[11px]",
+        "border_class": "border-l-4 border-l-orange-500",
+        "dot_class": "bg-orange-400",
+        "description": "Audit inconclusive or conflicting evidence."
+      }
+    },
+    "semantic_severity_map": {
+      "CRITICAL": "bg-rose-950/80 text-rose-300 border-rose-800 font-mono text-[11px]",
+      "HIGH": "bg-orange-950/80 text-orange-300 border-orange-800 font-mono text-[11px]",
+      "MEDIUM": "bg-amber-950/80 text-amber-300 border-amber-800 font-mono text-[11px]",
+      "LOW": "bg-emerald-950/80 text-emerald-300 border-emerald-800 font-mono text-[11px]",
+      "OPTIONAL": "bg-indigo-950/80 text-indigo-300 border-indigo-800 font-mono text-[11px]"
+    }
+  },
+  "entry_surfaces": {
+    "/": "Institutional specification portal — persistent left tree hierarchy, document view with specification header & live Markdown renderer center, in-page TOC & metadata right"
+  },
+  "layout_and_grids": {
+    "app_structure": "Three-column technical documentation workstation",
+    "columns": {
+      "left_sidebar": {
+        "width": "w-72 lg:w-80",
+        "role": "Collapsible tree browser over the 8 canonical sections (audit/, constitution/, architecture/, protocols/, api-contracts/, specifications/, rfc/, diagrams/) + quick views (Matrix, Status, Compare, RFCs, Gaps, Contradictions, Evidence)",
+        "classes": "shrink-0 border-r border-border/50 bg-[#0E131F]/90 backdrop-blur h-[calc(100vh-3.5rem)] sticky top-14 overflow-y-auto p-3"
+      },
+      "center_viewport": {
+        "width": "flex-1 min-w-0 max-w-5xl mx-auto",
+        "role": "Document reading surface & interactive audit modules (Matrix, Status, Architecture Diff)",
+        "classes": "px-6 py-8 sm:px-10 sm:py-10 max-w-4xl xl:max-w-5xl"
+      },
+      "right_toc": {
+        "width": "w-64 xl:w-72 hidden xl:block",
+        "role": "In-page table of contents, document version & status badge, evidence links, and audit attribution tags",
+        "classes": "shrink-0 border-l border-border/40 bg-transparent h-[calc(100vh-3.5rem)] sticky top-14 overflow-y-auto p-4 text-xs font-mono"
+      }
+    },
+    "header": {
+      "height": "h-14",
+      "classes": "sticky top-0 z-50 w-full border-b border-border/60 bg-[#0B0F17]/95 backdrop-blur px-4 flex items-center justify-between",
+      "elements": [
+        "Brand identity: 'CVLN INTELLIGENCE OS // TITAN ARCHITECTURE SPECIFICATION v1.0'",
+        "Global search modal trigger with hotkey: [Cmd/Ctrl + K]",
+        "Section switcher pills: [Audit, Specs, Matrix, Current vs Target, RFCs, Gaps]",
+        "Evidence repository status indicator (Laurent.ia, CVLNAgentfactory, MetaCVLN)"
+      ]
+    }
+  },
+  "visual_enhancers": {
+    "grid_borders": "1px solid rgba(255, 255, 255, 0.08) with high precision technical crosshairs on headers",
+    "code_blocks": "Deep obsidian background (#070A10), subtle 1px border, line numbering, copy button with success feedback, language badge in top right",
+    "mermaid_container": "Solid slate container (#0B1120) with subtle grid background, zoom/reset controls, export SVG/PNG button, clear rendering state",
+    "spec_metadata_header": "Institutional RFC-style bounding box: Status badge, Attribution level (CONCEPT / SPECIFICATION / IMPLEMENTATION / DEPLOYED RUNTIME), Canonical Path, Version, Owner, Evidence Source Links",
+    "unverified_edges": "Dashed lines with warning annotation in target architecture comparisons to prevent speculation confusion"
+  },
+  "component_hierarchy": {
+    "sidebar_tree": "/frontend/src/components/doc/DocTreeNav.tsx",
+    "doc_reader": "/frontend/src/components/doc/MarkdownDocViewer.tsx",
+    "doc_header": "/frontend/src/components/doc/DocMetadataHeader.tsx",
+    "mermaid_renderer": "/frontend/src/components/doc/MermaidDiagram.tsx",
+    "search_dialog": "/frontend/src/components/search/DocSearchDialog.tsx",
+    "component_matrix": "/frontend/src/components/audit/ComponentMatrixTable.tsx",
+    "status_dashboard": "/frontend/src/components/audit/ImplementationStatusDashboard.tsx",
+    "arch_diff_view": "/frontend/src/components/audit/ArchitectureDiffView.tsx",
+    "rfc_index": "/frontend/src/components/audit/RfcIndexView.tsx",
+    "gap_register": "/frontend/src/components/audit/GapAnalysisRegister.tsx",
+    "contradictions_register": "/frontend/src/components/audit/ContradictionsRegister.tsx",
+    "evidence_links_browser": "/frontend/src/components/audit/EvidenceLinksBrowser.tsx"
+  },
+  "motion": {
+    "philosophy": "Restrained, deterministic, zero-fluff micro-interactions suited for serious systems engineering docs",
+    "transitions": {
+      "dropdown_and_dialog": "transition-opacity duration-150 ease-out",
+      "tree_accordion": "transition-all duration-200 ease-in-out",
+      "tab_switching": "transition-colors duration-100 ease-linear",
+      "hover_lift": "hover:border-foreground/30 transition-colors duration-150"
+    },
+    "accessibility_reduced_motion": "Wrap animations with @media (prefers-reduced-motion: reduce) { transition: none !important; }"
+  },
+  "accessibility": {
+    "contrast_standard": "Strict WCAG AA and APCA compliant for low-light specification reading",
+    "keyboard_nav": "Full arrow key navigation in tree view, [Cmd+K] / [/] focus on search, Esc to close modals",
+    "screen_reader_tags": "aria-expanded on tree folders, aria-current on active spec, data-testid on all interactive nodes",
+    "status_distinction": "Status values never rely solely on color; they always include the textual status label and distinctive shape/border treatment (e.g., dashed for PROPOSED)"
+  },
+  "canonical_vocabulary": {
+    "META_CVLN": "Operating system / governance layer",
+    "CVLN_AGENT_FACTORY": "Nervous system / agent runtime",
+    "CVL_BRAIN": "Sovereign intelligence engine",
+    "LAURENTIA": "Cultural-industry operator"
+  },
+  "data_attribution_levels": [
+    "CONCEPT",
+    "SPECIFICATION",
+    "IMPLEMENTATION",
+    "DEPLOYED RUNTIME"
+  ],
+  "image_urls": [],
+  "instructions_to_main_agent": {
+    "architecture_rule": "The Markdown documents on disk represent the canonical truth. The web portal is a high-fidelity renderer and forensic auditor. Ensure all 8 canonical sections are cleanly represented in the sidebar tree.",
+    "status_treatment": "PROPOSED status must be visibly distinct (dashed amber border, 'TARGET SPEC' watermark or label) so no reader confuses a planned feature for an existing system capability.",
+    "mermaid_integration": "Install or import mermaid for rendering diagram code fences (```mermaid ... ```). Fallback cleanly to formatted code if rendering fails.",
+    "testing_ids": "Ensure all navigation links, search inputs, status filter badges, and table sort controls have data-testid attributes (e.g. data-testid='tree-nav-item-architecture-kernel', data-testid='status-filter-implemented').",
+    "no_saas_gradients": "Avoid colorful AI-gradient gimmicks or floaty cards. Maintain Swiss-style technical rigor, crisp grid borders, high density data tables, and clean typography."
+  },
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": {
+    "avoid_ai_slop": "Do not use generic centered layouts, purple glow gradients, or AI emojis. Use strict IBM Plex Sans/Mono typography, restrained status tokens, and dense information architecture.",
+    "spacing": "Maintain comfortable reading measure (max 75 characters per line in Markdown text) with generous whitespace between technical sub-sections.",
+    "components": "Use the shipped base-nova shadcn components (Table, Dialog, Tabs, Badge, Button, Input, DropdownMenu, Select) with custom dark sovereign styling."
+  }
+}
