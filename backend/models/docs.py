@@ -97,9 +97,15 @@ class StatusCount(BaseModel):
 
 
 class StatusStats(BaseModel):
+    os_version: str
     total_documents: int
     total_components: int
     document_status: list[StatusCount]
     component_status: list[StatusCount]
     gap_severity: list[StatusCount]
     contradictions: int
+    section_counts: list[StatusCount]
+    registry_rows: int
+    total_decisions: int
+    invariants_passed: int
+    invariants_total: int

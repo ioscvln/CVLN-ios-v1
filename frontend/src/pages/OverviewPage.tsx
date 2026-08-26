@@ -97,7 +97,7 @@ export default function OverviewPage() {
   return (
     <div className="px-6 py-8 sm:px-10 lg:px-14">
       <p className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-muted-foreground">
-        OS v1.0 — TITAN FOUNDATION · Forensic architecture audit
+        {data?.os_version ?? "OS v1.1"} · Forensic architecture audit · baseline frozen
       </p>
       <h1 data-testid="overview-title" className="mt-2 text-3xl font-semibold tracking-tight text-foreground">
         CVLN Intelligence OS
@@ -138,6 +138,32 @@ export default function OverviewPage() {
         <Stat value={isLoading ? "—" : data!.total_components} label="Components audited" testId="stat-components" />
         <Stat value={isLoading ? "—" : gapTotal} label="Gaps classified" testId="stat-gaps" />
         <Stat value={isLoading ? "—" : data!.contradictions} label="Contradictions recorded" testId="stat-contradictions" />
+        <Stat value={isLoading ? "—" : data!.total_decisions} label="Foundational decisions" testId="stat-decisions" />
+        <Stat value={isLoading ? "—" : data!.registry_rows} label="Registry rows" testId="stat-registry-rows" />
+        <Stat
+          value={isLoading ? "—" : `${data!.invariants_passed}/${data!.invariants_total}`}
+          label="Freeze invariants holding"
+          testId="stat-invariants"
+        />
+        <Stat
+          value={isLoading ? "—" : data!.section_counts.length}
+          label="Corpus sections"
+          testId="stat-sections"
+        />
+      </div>
+
+      <div className="mt-4 border border-dashed border-sky-800/70 bg-sky-950/20 px-4 py-3">
+        <p className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-sky-300">
+          v1.1 — Architecture baseline frozen
+        </p>
+        <p className="mt-1.5 max-w-[85ch] text-[13px] leading-relaxed text-muted-foreground">
+          The v1.0 corpus is preserved append-only. Governance, security, resilience,
+          legal-by-design, proof and economic dimensions were added as TARGET or PROPOSED unless
+          evidence exists. IMPLEMENTED never implies VERIFIED.{" "}
+          <Link to="/freeze" data-testid="overview-goto-freeze" className="font-mono text-[11.5px] text-sky-400 hover:text-sky-300">
+            Open the freeze report ↗
+          </Link>
+        </p>
       </div>
 
       <section className="mt-12">

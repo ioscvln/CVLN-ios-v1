@@ -9,6 +9,10 @@ const NAV = [
   { to: "/", label: "Overview", testId: "nav-overview" },
   { to: "/matrix", label: "Component Matrix", testId: "nav-matrix" },
   { to: "/gaps", label: "Gap Analysis", testId: "nav-gaps" },
+  { to: "/freeze", label: "Freeze v1.1", testId: "nav-freeze" },
+  { to: "/decisions", label: "Decisions", testId: "nav-decisions" },
+  { to: "/registry/ecosystem", label: "Registries", testId: "nav-registries" },
+  { to: "/graph", label: "Traceability", testId: "nav-graph" },
   { to: "/architecture", label: "Current vs Target", testId: "nav-architecture" },
   { to: "/search", label: "Search", testId: "nav-search" },
 ];
@@ -49,7 +53,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             CVLN-INTELLIGENCE-OS
           </span>
           <span className="hidden font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground sm:inline">
-            {tree?.version ?? "OS v1.0"}
+            {tree?.version ?? "OS v1.1"}
           </span>
         </Link>
 

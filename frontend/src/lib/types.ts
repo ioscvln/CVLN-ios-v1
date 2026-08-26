@@ -97,10 +97,16 @@ export interface StatusCount {
 }
 
 export interface StatusStats {
+  os_version: string;
   total_documents: number;
   total_components: number;
   document_status: StatusCount[];
   component_status: StatusCount[];
   gap_severity: StatusCount[];
   contradictions: number;
+  section_counts: StatusCount[];
+  registry_rows: number;
+  total_decisions: number;
+  invariants_passed: number;
+  invariants_total: number;
 }

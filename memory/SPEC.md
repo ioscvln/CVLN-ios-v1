@@ -64,3 +64,52 @@ None. The portal is entirely public and read-only. No accounts, no PIN, no gated
 - Corpus generators live in `/app/scripts/gen_*.py`. They **overwrite** corpus files;
   edit the generator, or the Markdown, but do not re-run generators after hand-editing
   Markdown.
+
+---
+
+## v1.1 — ARCHITECTURE BASELINE FROZEN (append-only upgrade)
+
+Corpus: 126 Markdown documents (87 v1.0 preserved verbatim + 39 added). Markdown remains
+the sole canonical store; no MongoDB collection mirrors it.
+
+### Added corpus sections
+`decisions/` (D-001…D-014 registry, 14 ADRs + template), `registry/` (ecosystem,
+component wrapper, vulnerability, continuity, legal), `security/`, `resilience/`,
+`legal/`, `proof/`, `economics/`, plus `constitution/FREEZE-001.md`,
+`audit/freeze-manifest.yaml`, `audit/FREEZE-REPORT-v1.1.md`, `audit/v10-inventory.txt`,
+`rfc/RFC-0007-BASELINE-FREEZE.md`, and an appended `CHANGELOG.md` entry.
+
+### Generators / checkers
+- `scripts/gen_v11_freeze.py` — regenerates the v1.1 documents (never touches v1.0).
+- `scripts/check_freeze_invariants.py` — runs INV-001…INV-008, exit 1 on violation.
+- `backend/lib/invariants.py` — the invariant implementations (shared with the API).
+
+### New API (all on `api_router`, prefix `/api`)
+| Endpoint | Returns |
+|---|---|
+| `GET /api/docs/registries` | Descriptor per registry (key, title, source, row count, columns) |
+| `GET /api/docs/registry/{key}` | Registry table: columns, rows, status column index. 404 on unknown key |
+| `GET /api/docs/freeze` | Freeze manifest + live counts + INV-001…INV-008 verdicts |
+| `GET /api/docs/graph` | Traceability nodes/edges derived from registries at request time |
+| `GET /api/docs/stats` | Extended: `os_version`, `section_counts`, `registry_rows`, `total_decisions`, `invariants_passed/total` |
+
+Registry keys: `ecosystem`, `component`, `vulnerability`, `continuity`, `legal`, `decisions`.
+Models `backend/models/freeze.py` ↔ TS `frontend/src/lib/freezeTypes.ts` (hand-mirrored).
+
+### New portal views
+`/freeze` (freeze report + invariant verdicts), `/decisions` (D-001…D-014 cards → ADR),
+`/registry/:key` (tabbed registries, status + text filters), `/graph` (Mermaid
+traceability graph with node-kind filters). Nav entries: Freeze v1.1, Decisions,
+Registries, Traceability.
+
+### Frozen rules enforced by the UI and the checker
+- `IMPLEMENTED` never implies `VERIFIED`; `CURRENT` never implies `TARGET`.
+- New dimensions ship as `TARGET`/`PROPOSED`/`UNKNOWN` — never `IMPLEMENTED`.
+- JCC is an internal accounting unit only (INV-006 rejects any currency affirmation).
+- Contradiction C-002 (doctrine ownership) stays open (INV-004).
+- v1.0 inventory of 87 paths must remain present (INV-007).
+- Status vocabulary: OBSERVED, DECIDED, IMPLEMENTED, VERIFIED, PROPOSED, TARGET,
+  UNKNOWN, DEPRECATED, REJECTED (+ legacy v1.0 tokens PARTIAL, DEFINED, REFERENCED,
+  PRIVATE / NOT VISIBLE).
+
+No auth, no credentials: the portal stays public and read-only.

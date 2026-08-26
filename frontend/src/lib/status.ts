@@ -9,6 +9,12 @@ export const STATUS_TOKENS: Record<string, string> = {
   REFERENCED: "bg-cyan-950/70 text-cyan-300 border-cyan-800/80",
   "PRIVATE / NOT VISIBLE": "bg-slate-800/70 text-slate-300 border-slate-600/80",
   PROPOSED: "bg-amber-950/70 text-amber-300 border-amber-600/90 border-dashed",
+  TARGET: "bg-fuchsia-950/70 text-fuchsia-300 border-fuchsia-700/90 border-dashed",
+  DECIDED: "bg-sky-950/70 text-sky-300 border-sky-800/80",
+  OBSERVED: "bg-teal-950/70 text-teal-300 border-teal-800/80",
+  VERIFIED: "bg-green-950/70 text-green-300 border-green-700/80",
+  DEPRECATED: "bg-zinc-900/70 text-zinc-400 border-zinc-700/80",
+  REJECTED: "bg-rose-950/70 text-rose-300 border-rose-800/80",
   UNKNOWN: "bg-neutral-900/70 text-neutral-400 border-neutral-700/80 border-dotted",
 };
 
@@ -27,6 +33,7 @@ export const STATUS_ORDER = [
   "REFERENCED",
   "PRIVATE / NOT VISIBLE",
   "PROPOSED",
+  "TARGET",
   "UNKNOWN",
 ];
 

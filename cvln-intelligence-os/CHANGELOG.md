@@ -43,3 +43,13 @@ See [`audit/RESPONSIBILITY-MATRIX.md`](../audit/RESPONSIBILITY-MATRIX.md) for cu
 ## Future RFC references
 
 `RFC-0001`
+
+## v1.1 — ARCHITECTURE BASELINE FROZEN
+
+Append-only upgrade of the v1.0 baseline, authorised by `constitution/FREEZE-001.md`
+and `rfc/RFC-0007-BASELINE-FREEZE.md` (decision D-005).
+
+- Added `decisions/` (D-001…D-014 with one ADR each), `security/`, `resilience/`,
+  `legal/`, `proof/`, `economics/`, `registry/`.
+- Added `audit/freeze-manifest.yaml` and `audit/FREEZE-REPORT-v1.1.md`.
+- No v1.0 document deleted, moved or rewritten. This CHANGELOG entry is an append.

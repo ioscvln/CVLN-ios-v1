@@ -15,6 +15,13 @@ CORPUS_ROOT = Path(os.environ.get("CVLN_CORPUS_ROOT", "/app/cvln-intelligence-os
 SECTION_ORDER = [
     "audit",
     "constitution",
+    "decisions",
+    "registry",
+    "security",
+    "resilience",
+    "legal",
+    "proof",
+    "economics",
     "architecture",
     "protocols",
     "api-contracts",
@@ -176,3 +183,25 @@ def parse_table(rel_path: str, min_columns: int) -> list[list[str]]:
         elif started:
             break
     return rows
+
+
+# --- v1.1 baseline freeze -------------------------------------------------------------
+
+FREEZE_MANIFEST = "audit/freeze-manifest.yaml"
+
+
+def parse_registry(rel_path: str, min_columns: int = 6) -> tuple[list[str], list[list[str]]]:
+    """First pipe table of a registry document: (header cells, data rows)."""
+    rows = parse_table(rel_path, min_columns=min_columns)
+    if not rows:
+        return [], []
+    return rows[0], rows[1:]
+
+
+def read_manifest() -> dict:
+    """Parse the machine-readable freeze manifest. Read-only, never written."""
+    import yaml  # pyyaml ships with the backend venv
+
+    text = (CORPUS_ROOT / FREEZE_MANIFEST).read_text(encoding="utf-8")
+    data = yaml.safe_load(text)
+    return data if isinstance(data, dict) else {}

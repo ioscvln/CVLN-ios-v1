@@ -2,7 +2,8 @@ from collections import Counter
 
 from fastapi import APIRouter, HTTPException, Query
 
-from lib import corpus
+from lib import corpus, invariants
+from routers.freeze import REGISTRIES, _load
 from models.docs import (
     ComponentMatrix,
     ComponentRow,
@@ -19,10 +20,17 @@ from models.docs import (
 
 router = APIRouter(prefix="/docs", tags=["docs"])
 
-OS_VERSION = "OS v1.0 — TITAN FOUNDATION"
+OS_VERSION = "OS v1.1 — ARCHITECTURE BASELINE FROZEN"
 
 SECTION_LABELS = {
     "root": "Repository",
+    "decisions": "Decisions · ADR",
+    "registry": "Registries",
+    "security": "Security",
+    "resilience": "Resilience & Continuity",
+    "legal": "Legal-by-Design",
+    "proof": "Intelligent Proof",
+    "economics": "Economic Intelligence",
     "audit": "Phase 0–4 · Forensic Audit",
     "constitution": "Constitution",
     "architecture": "Architecture",
@@ -146,11 +154,21 @@ async def get_stats() -> StatusStats:
             for k, v in sorted(counter.items(), key=lambda kv: (-kv[1], kv[0]))
         ]
 
+    section_counter = Counter(e["section"] for e in index)
+    inv = invariants.run_all()
+    registry_rows = sum(_load(key).total for key in REGISTRIES)
+
     return StatusStats(
+        os_version=OS_VERSION,
         total_documents=len(index),
         total_components=matrix.total,
         document_status=to_counts(doc_counter),
         component_status=to_counts(comp_counter),
         gap_severity=to_counts(sev_counter),
         contradictions=contradictions,
+        section_counts=to_counts(section_counter),
+        registry_rows=registry_rows,
+        total_decisions=_load("decisions").total,
+        invariants_passed=sum(1 for i in inv if i["passed"]),
+        invariants_total=len(inv),
     )

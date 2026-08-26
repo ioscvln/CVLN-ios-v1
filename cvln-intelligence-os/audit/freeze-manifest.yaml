@@ -1,0 +1,57 @@
+# CVLN Intelligence OS — Freeze Manifest
+# Machine-readable companion to constitution/FREEZE-001.md.
+version: "1.1"
+label: "OS v1.1 - ARCHITECTURE BASELINE FROZEN"
+predecessor: "OS v1.0 - TITAN FOUNDATION"
+freeze_instrument: constitution/FREEZE-001.md
+freeze_report: audit/FREEZE-REPORT-v1.1.md
+canonical_store: markdown
+database_as_source_of_truth: false
+append_only: true
+audited_repositories:
+  - https://github.com/metacvln-spec/MetaCVLN
+  - https://github.com/frekcore/CVLNAgentfactory/tree/CVLN-AGENT-FACTORY
+  - https://github.com/cultureconnectorg/Laurent.ia/tree/public
+status_vocabulary:
+  - OBSERVED
+  - DECIDED
+  - IMPLEMENTED
+  - VERIFIED
+  - PROPOSED
+  - TARGET
+  - UNKNOWN
+  - DEPRECATED
+  - REJECTED
+sections_added:
+  - decisions
+  - security
+  - resilience
+  - legal
+  - proof
+  - economics
+  - registry
+registries:
+  ecosystem: registry/ECOSYSTEM-REGISTRY.md
+  component: audit/COMPONENT-MATRIX.md
+  vulnerability: registry/VULNERABILITY-REGISTRY.md
+  continuity: registry/CONTINUITY-MATRIX.md
+  legal: registry/LEGAL-MATRIX.md
+  decisions: decisions/DECISION-REGISTRY.md
+invariants:
+  - id: INV-001
+    rule: no row may carry IMPLEMENTED or VERIFIED without an evidence path
+  - id: INV-002
+    rule: every decision D-001..D-014 has an ADR document
+  - id: INV-003
+    rule: markdown remains the canonical store; no database mirrors the corpus
+  - id: INV-004
+    rule: the contradictions register is non-empty and C-002 remains open
+  - id: INV-005
+    rule: every document declares a status from the canonical vocabulary
+  - id: INV-006
+    rule: JCC is never described as currency or a payment instrument
+  - id: INV-007
+    rule: no v1.0 document was deleted
+  - id: INV-008
+    rule: every registry row has exactly one status cell
+unverified_claims_policy: "IMPLEMENTED never implies VERIFIED"

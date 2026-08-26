@@ -6,6 +6,10 @@ import MatrixPage from "@/pages/MatrixPage";
 import GapsPage from "@/pages/GapsPage";
 import SearchPage from "@/pages/SearchPage";
 import ArchitecturePage from "@/pages/ArchitecturePage";
+import FreezePage from "@/pages/FreezePage";
+import DecisionsPage from "@/pages/DecisionsPage";
+import RegistryPage from "@/pages/RegistryPage";
+import GraphPage from "@/pages/GraphPage";
 
 export default function App() {
   return (
@@ -16,6 +20,11 @@ export default function App() {
         <Route path="/matrix" element={<MatrixPage />} />
         <Route path="/gaps" element={<GapsPage />} />
         <Route path="/architecture" element={<ArchitecturePage />} />
+        <Route path="/freeze" element={<FreezePage />} />
+        <Route path="/decisions" element={<DecisionsPage />} />
+        <Route path="/registry" element={<RegistryPage />} />
+        <Route path="/registry/:key" element={<RegistryPage />} />
+        <Route path="/graph" element={<GraphPage />} />
         <Route path="/search" element={<SearchPage />} />
       </Routes>
     </AppShell>
