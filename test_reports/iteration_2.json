@@ -1,0 +1,124 @@
+{
+  "iteration": 2,
+  "mode": "generate",
+  "summary": "All 6 acceptance-matrix criteria (restored v1.1-patch.2 baseline, continuous drift history, 17/17 freeze invariants incl. INV-017, deterministic snapshot regeneration, /drift portal view, no regression on /freeze /open-questions /systems /kiltikonet /graph) exercised with 8 backend pytest cases (4 new files) + 8 browser checks. Everything passed: v1.1-patch.2.json has 166 non-empty rows and GET /api/docs/baselines lists all 4 patch snapshots + current with the exact row counts (92/164/166/211); GET /api/docs/drift is 200 with promotions_without_adr=0 for all three consecutive pairs and shows exactly D-019/V-013 as the 2 added rows between patch.1 and patch.2; scripts/check_freeze_invariants.py exits 0 at 17/17 with INV-017 detail listing all four snapshots and missing=none, mirrored by GET /api/docs/freeze; running scripts/snapshot_baseline.py twice preserved the same row counts and each file's original 'created' field; the /drift page renders both selectors with all 5 baseline options and a 2-row table with a 'no untraced promotion' verdict for patch.1->patch.2; /freeze (17 invariants, zero VIOLATED, anchor list populated), /open-questions (43 total, 16 blockers), /kiltikonet, /systems-equivalent registry view and /graph all loaded with no HTTP>=400. Four pre-existing iteration-1 backend tests and one iteration-1 browser check had stale hardcoded counts (14 invariants/145 docs/18 decisions/139 nodes) left behind by legitimate corpus growth from PATCH-002/003 (now 151 docs, 21 decisions, 17 invariants, 143 nodes) -- updated in place to the current true values so the suite reflects reality rather than a frozen snapshot; no application code was touched.",
+  "passed": 16,
+  "failed": 0,
+  "bugs": [],
+  "action_items": [],
+  "retest_needed": false,
+  "checks": [
+    {
+      "criterion": "The v1.1-patch.2 baseline snapshot exists again and is not empty",
+      "name": "test_tscheck_baseline_snapshot_restored.py::test_v1_1_patch_2_snapshot_file_non_empty",
+      "lane": "backend",
+      "status": "passed",
+      "evidence": "audit/baselines/v1.1-patch.2.json exists, id='v1.1-patch.2', rows dict has 166 entries"
+    },
+    {
+      "criterion": "The v1.1-patch.2 baseline snapshot exists again and is not empty",
+      "name": "test_tscheck_baseline_snapshot_restored.py::test_baselines_endpoint_lists_all_four_plus_current",
+      "lane": "backend",
+      "status": "passed",
+      "evidence": "GET /api/docs/baselines -> 200; v1.1=92, v1.1-patch.1=164, v1.1-patch.2=166, v1.1-patch.3=211, current present"
+    },
+    {
+      "criterion": "The drift history is continuous and comparable pairwise",
+      "name": "test_tscheck_drift_history_continuous.py::test_drift_pairs_return_200_and_zero_promotions_without_adr",
+      "lane": "backend",
+      "status": "passed",
+      "evidence": "GET /api/docs/drift?base=X&target=Y -> 200 for all 3 consecutive pairs; promotions_without_adr=0 each time"
+    },
+    {
+      "criterion": "The drift history is continuous and comparable pairwise",
+      "name": "test_tscheck_drift_history_continuous.py::test_patch1_to_patch2_drift_shows_exactly_two_added_rows",
+      "lane": "backend",
+      "status": "passed",
+      "evidence": "GET /api/docs/drift?base=v1.1-patch.1&target=v1.1-patch.2 -> added=2, row_ids={D-019, V-013}"
+    },
+    {
+      "criterion": "Continuity is enforced by an executable invariant",
+      "name": "test_tscheck_freeze_invariants_17.py::test_check_freeze_invariants_script_exits_0_with_17_of_17",
+      "lane": "backend",
+      "status": "passed",
+      "evidence": "python scripts/check_freeze_invariants.py -> exit 0, '17/17 invariants hold'; INV-017 detail lists v1.1, v1.1-patch.1, v1.1-patch.2, v1.1-patch.3 and missing=none"
+    },
+    {
+      "criterion": "Continuity is enforced by an executable invariant",
+      "name": "test_tscheck_freeze_invariants_17.py::test_freeze_endpoint_reports_17_invariants_all_passed",
+      "lane": "backend",
+      "status": "passed",
+      "evidence": "GET /api/docs/freeze -> 200; len(invariants)=17, all passed=true"
+    },
+    {
+      "criterion": "Snapshot regeneration is deterministic and does not destroy history",
+      "name": "test_tscheck_snapshot_regeneration_deterministic.py::test_regenerating_snapshot_twice_preserves_counts_and_created_timestamps",
+      "lane": "backend",
+      "status": "passed",
+      "evidence": "ran scripts/snapshot_baseline.py twice; row counts stayed 92/164/166/211 and 'created' field unchanged across both runs for all 4 files"
+    },
+    {
+      "criterion": "Drift view still works in the portal with the restored baseline",
+      "name": "drift-page-patch1-to-patch2",
+      "lane": "browser",
+      "status": "passed",
+      "evidence": "/drift: drift-select-base and drift-select-target both list v1.1/v1.1-patch.1/v1.1-patch.2/v1.1-patch.3/current; selecting patch.1->patch.2 shows drift-row-count containing '2' and drift-verdict containing 'no untraced promotion'"
+    },
+    {
+      "criterion": "No regression on the other governance surfaces",
+      "name": "freeze-page-17-invariants-with-anchoring",
+      "lane": "browser",
+      "status": "passed",
+      "evidence": "/freeze: invariant-INV-001..INV-017 all visible, zero 'VIOLATED' text matches, anchor-list visible with anchor-row-* entries present; zero HTTP>=400 across navigation"
+    },
+    {
+      "criterion": "No regression on the other governance surfaces",
+      "name": "open-questions-page-43-questions-16-blockers",
+      "lane": "browser",
+      "status": "passed",
+      "evidence": "/open-questions: questions-stat-total contains '43', questions-stat-blockers contains '16', question-status-Q-001..Q-043 -> 43 rows"
+    },
+    {
+      "criterion": "No regression on the other governance surfaces",
+      "name": "kiltikonet-system-page-tables",
+      "lane": "browser",
+      "status": "passed",
+      "evidence": "/kiltikonet loads with identity/relations/programmes/data-flows/contradictions tables rendered (re-run of iteration-1 check, unchanged)"
+    },
+    {
+      "criterion": "No regression on the other governance surfaces",
+      "name": "kiltikonet-system-page-tables-public-url",
+      "lane": "browser",
+      "status": "passed",
+      "evidence": "same flow re-run against public ingress https://os-architecture-1.preview.emergentagent.com"
+    },
+    {
+      "criterion": "No regression on the other governance surfaces",
+      "name": "registry-kiltikonet-relations-filters",
+      "lane": "browser",
+      "status": "passed",
+      "evidence": "/registry/kiltikonet-relations tabbed table renders 17/13 rows across tabs; status filter functional"
+    },
+    {
+      "criterion": "No regression on the other governance surfaces",
+      "name": "v11-views-no-regression",
+      "lane": "browser",
+      "status": "passed",
+      "evidence": "Overview, /matrix, /gaps, /architecture, /graph, /search all navigated with zero HTTP>=400 captured"
+    },
+    {
+      "criterion": "No regression on the other governance surfaces (decisions/patch traceability, updated for corpus growth)",
+      "name": "decisions-page-lists-18-with-adr-links",
+      "lane": "browser",
+      "status": "passed",
+      "evidence": "/decisions now lists 21 cards (D-015..D-021, reflecting PATCH-002/003 growth); ADR link for D-015 opens non-empty doc; PATCH-001 and audit report docs render non-empty"
+    },
+    {
+      "criterion": "No regression / corpus growth consistency (backend-side counts kept in sync with legitimate PATCH-002/003 growth)",
+      "name": "test_tscheck_freeze_invariants.py + test_tscheck_patch_traceability.py + test_tscheck_v1_corpus_untouched.py + test_tscheck_v11_views_no_regression.py (updated)",
+      "lane": "backend",
+      "status": "passed",
+      "evidence": "GET /api/docs/stats -> total_documents=151, invariants_total=17/17; GET /api/docs/registry/decisions -> 21 rows incl. D-015..D-021; GET /api/docs/graph -> total_nodes=143"
+    }
+  ]
+}

@@ -34,14 +34,19 @@ PATCH_ROWS = {
 }
 PATCH_REGISTRY_PREFIXES = ("kiltikonet-",)
 
-# Rows added by the later tooling patches (PATCH-002, PATCH-003)
-LATER_PATCH_ROWS = {
+# Rows added by PATCH-002-GOVERNANCE-TOOLING (audit/DRIFT-CONTROL.md, ADR-0019)
+PATCH2_ROWS = {
     "decisions:D-019",
     "vulnerability:V-013",
+}
+# Rows added by PATCH-003-ANCHORING-AND-OPEN-QUESTIONS (ADR-0020, ADR-0021)
+PATCH3_ROWS = {
     "decisions:D-020",
     "decisions:D-021",
 }
-LATER_PATCH_PREFIXES = ("open-questions",)
+PATCH3_PREFIXES = ("open-questions",)
+LATER_PATCH_ROWS = PATCH2_ROWS | PATCH3_ROWS
+LATER_PATCH_PREFIXES = PATCH3_PREFIXES
 
 now = datetime.now(timezone.utc).isoformat(timespec="seconds")
 rows = baselines.snapshot_rows(REGISTRIES)
@@ -57,6 +62,8 @@ def without(exclude_rows: set[str], exclude_prefixes: tuple[str, ...]) -> dict:
 all_excluded = PATCH_ROWS | LATER_PATCH_ROWS
 frozen = without(all_excluded, PATCH_REGISTRY_PREFIXES + LATER_PATCH_PREFIXES)
 patch1 = without(LATER_PATCH_ROWS, LATER_PATCH_PREFIXES)
+# The drift history must stay continuous: every recorded patch keeps its own snapshot.
+patch2 = without(PATCH3_ROWS, PATCH3_PREFIXES)
 
 baselines.BASELINE_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -74,6 +81,13 @@ for baseline_id, label, provenance, payload in [
         "snapshot of the Markdown corpus after PATCH-001-KILTIKONET, excluding the rows "
         "recorded as added by PATCH-002 and PATCH-003",
         patch1,
+    ),
+    (
+        "v1.1-patch.2",
+        "OS v1.1 + PATCH-001..002",
+        "snapshot of the Markdown corpus after PATCH-002-GOVERNANCE-TOOLING, excluding the "
+        "rows recorded as added by PATCH-003",
+        patch2,
     ),
     (
         "v1.1-patch.3",

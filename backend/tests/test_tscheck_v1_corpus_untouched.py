@@ -1,10 +1,10 @@
 """v1.0 corpus and the v1.1 freeze text are untouched."""
 
 
-def test_total_documents_is_145(client):
+def test_total_documents_is_151(client):
     resp = client.get("/docs/stats")
     assert resp.status_code == 200, resp.text
-    assert resp.json()["total_documents"] == 145
+    assert resp.json()["total_documents"] == 151
 
 
 def test_freeze_documents_load_and_omit_kiltikonet(client):

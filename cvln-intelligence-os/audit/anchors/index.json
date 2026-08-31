@@ -1,5 +1,33 @@
 [
  {
+  "digest": "880458d18fc7a5745b6e0ececc08c378362159c0ac7f397aece6543d9f22174d",
+  "subject": "EP-v1.1-880458d18fc7 (CVLN Intelligence OS baseline v1.1)",
+  "provider": "ots",
+  "provider_label": "OpenTimestamps — Bitcoin calendar attestation (independent proof of temporal existence)",
+  "status": "pending",
+  "calendar": "https://a.pool.opentimestamps.org",
+  "created_at": "2026-08-31T13:21:36+00:00",
+  "upgraded_at": null,
+  "attempts": 1,
+  "detail": "Calendar accepted the digest. The attestation is pending until it is anchored in a Bitcoin block; upgrade the proof to obtain the block attestation.",
+  "proof_file": "audit/anchors/880458d18fc7a5745b6e0ececc08c378362159c0ac7f397aece6543d9f22174d.ots",
+  "qualified_timestamp": false
+ },
+ {
+  "digest": "880458d18fc7a5745b6e0ececc08c378362159c0ac7f397aece6543d9f22174d",
+  "subject": "EP-v1.1-880458d18fc7 (CVLN Intelligence OS baseline v1.1)",
+  "provider": "rfc3161",
+  "provider_label": "RFC 3161 timestamp authority — reserved for a future qualified provider",
+  "status": "unavailable",
+  "calendar": null,
+  "created_at": "2026-08-31T13:21:33+00:00",
+  "upgraded_at": null,
+  "attempts": 1,
+  "detail": "No RFC 3161 authority is configured. This provider is reserved so a qualified timestamp can be added later alongside OpenTimestamps, never replacing it.",
+  "proof_file": null,
+  "qualified_timestamp": false
+ },
+ {
   "digest": "e67e238da02f2c4251e03e622763aca808591a0c42d4a7103073c07b63fda5bb",
   "subject": "EP-v1.1-e67e238da02f (CVLN Intelligence OS baseline v1.1)",
   "provider": "rfc3161",

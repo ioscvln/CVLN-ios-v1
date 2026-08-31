@@ -12,8 +12,8 @@ def test_stats_endpoint_reports_all_invariants_passed(client):
     resp = client.get("/docs/stats")
     assert resp.status_code == 200, resp.text
     body = resp.json()
-    assert body["invariants_total"] == 14
-    assert body["invariants_passed"] == 14
+    assert body["invariants_total"] == 17
+    assert body["invariants_passed"] == 17
 
 
 def test_no_unproven_status_promotion_in_relations_and_programmes(client):

@@ -97,4 +97,6 @@ invariants:
     rule: every freeze-blocker in the open-questions register carries an owner field and a due field
   - id: INV-016
     rule: no anchoring artefact is described as a qualified or eIDAS timestamp
+  - id: INV-017
+    rule: the drift history is continuous - every recorded patch keeps its own baseline snapshot
 unverified_claims_policy: "IMPLEMENTED never implies VERIFIED"

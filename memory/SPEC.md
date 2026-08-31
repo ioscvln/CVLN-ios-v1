@@ -249,3 +249,12 @@ artefact described as qualified/eIDAS). Total: **16/16 hold**.
 `scripts/snapshot_baseline.py` now writes `v1.1`, `v1.1-patch.1`, `v1.1-patch.3`,
 excluding later-patch rows from earlier baselines. Drift v1.1 → current: 0 promotions,
 0 violations, 35 advisories.
+
+### Baseline history continuity (fix, v1.1-patch.3)
+`v1.1-patch.2` had never been written (lost when the exclusion lists were refactored in
+PATCH-003) and is restored: `scripts/snapshot_baseline.py` now writes four snapshots —
+`v1.1` (92 rows), `v1.1-patch.1` (164), `v1.1-patch.2` (166), `v1.1-patch.3` (211) —
+each excluding exactly the rows the later patch records document as added, so the drift
+history is comparable pairwise. **INV-017** asserts that every recorded patch keeps its
+own non-empty snapshot and that no snapshot is replaced (17/17 invariants hold).
+Documented in `audit/DRIFT-CONTROL.md` ("History continuity").

@@ -318,3 +318,34 @@ CHECKS += [
     ("INV-016", "No anchoring artefact is described as a qualified or eIDAS timestamp", inv_016),
 ]
 REGISTRY_SOURCES += [(OPEN_QUESTIONS, 9)]
+
+
+# --- Baseline history continuity (INV-017) --------------------------------------------
+
+EXPECTED_BASELINES = ["v1.1", "v1.1-patch.1", "v1.1-patch.2", "v1.1-patch.3"]
+
+
+def inv_017() -> tuple[bool, str]:
+    """The drift history is continuous: every recorded patch keeps its own snapshot."""
+    import json
+
+    manifest = corpus.read_manifest()
+    patches = [p.get("id", "") for p in manifest.get("post_freeze_patches", [])]
+    directory = corpus.CORPUS_ROOT / "audit/baselines"
+    present = sorted(p.stem for p in directory.glob("*.json")) if directory.exists() else []
+    missing = [b for b in EXPECTED_BASELINES if b not in present]
+    empty = []
+    for stem in present:
+        rows = json.loads((directory / f"{stem}.json").read_text(encoding="utf-8")).get("rows", {})
+        if not rows:
+            empty.append(stem)
+    ok = not missing and not empty and len(present) >= len(patches) + 1
+    return ok, (
+        f"snapshots={present}; expected={EXPECTED_BASELINES}; recorded_patches={patches}; "
+        f"missing={missing or 'none'}; empty={empty or 'none'}"
+    )
+
+
+CHECKS += [
+    ("INV-017", "The drift history is continuous: every recorded patch keeps its own snapshot", inv_017),
+]

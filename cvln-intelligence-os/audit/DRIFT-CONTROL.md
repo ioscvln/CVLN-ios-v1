@@ -33,9 +33,18 @@ Status strength order: `REJECTED`/`UNKNOWN`/`OPEN` < `DEPRECATED`/`HISTORICAL`/`
 |---|---|
 | `v1.1` | The frozen baseline, reconstructed by removing the rows that `audit/PATCH-001-KILTIKONET.md` records as added after the freeze |
 | `v1.1-patch.1` | The corpus after PATCH-001-KILTIKONET |
+| `v1.1-patch.2` | The corpus after PATCH-002-GOVERNANCE-TOOLING |
+| `v1.1-patch.3` | The corpus after PATCH-003-ANCHORING-AND-OPEN-QUESTIONS |
 | `current` | The working corpus, computed at request time |
 
 Snapshots live in `audit/baselines/` and are derived artefacts (D-019).
+
+**History continuity.** Every patch recorded in `audit/freeze-manifest.yaml` keeps its own
+snapshot, and a snapshot is never replaced by a later one: the drift history must remain
+continuous and comparable pairwise. `INV-017` asserts that every expected baseline file
+exists and is non-empty. A missing snapshot is regenerated deterministically by
+`scripts/snapshot_baseline.py`, which excludes from each baseline exactly the rows that
+the later patch records document as added.
 
 ## Surfaces
 
