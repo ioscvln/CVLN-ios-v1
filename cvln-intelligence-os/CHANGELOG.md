@@ -70,3 +70,11 @@ text is unchanged; this patch is not part of the original freeze.
   signed evidence-package export, and per-system cards in the portal.
 - Added decision D-019 with `decisions/ADR-0019-D-019.md`, vulnerability V-013.
 - `proof/EVIDENCE-PACKAGE.md` moved TARGET → PARTIAL, traced by ADR-0019.
+
+## v1.1-patch.3 — PATCH-003-ANCHORING-AND-OPEN-QUESTIONS (post-freeze tooling patch)
+
+- Added external anchoring (`proof/EXTERNAL-ANCHORING.md`, OpenTimestamps provider,
+  `rfc3161` reserved as TARGET) and the open-questions register
+  (`governance/OPEN-QUESTIONS.md`).
+- Added decisions D-020, D-021 with ADRs, and invariants INV-015, INV-016.
+- No v1.0 document touched; the v1.1 freeze text is unchanged.

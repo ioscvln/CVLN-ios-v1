@@ -35,6 +35,12 @@ post_freeze_patches:
     decision: decisions/ADR-0019-D-019.md
     type: tooling
     freeze_rewritten: false
+  - id: PATCH-003-ANCHORING-AND-OPEN-QUESTIONS
+    record: proof/EXTERNAL-ANCHORING.md
+    register: governance/OPEN-QUESTIONS.md
+    decisions: [decisions/ADR-0020-D-020.md, decisions/ADR-0021-D-021.md]
+    type: tooling
+    freeze_rewritten: false
 sections_added:
   - decisions
   - security
@@ -44,7 +50,9 @@ sections_added:
   - economics
   - registry
   - kiltikonet
+  - governance
 registries:
+  open-questions: governance/OPEN-QUESTIONS.md
   kiltikonet-relations: kiltikonet/RELATIONS-REGISTRY.md
   kiltikonet-programmes: kiltikonet/PROGRAMMES-REGISTRY.md
   kiltikonet-data: kiltikonet/DATA-FLOWS.md
@@ -85,4 +93,8 @@ invariants:
     rule: no internal Markdown reference added after v1.0 is broken (v1.0 links are frozen and reported only)
   - id: INV-014
     rule: every Kiltikonet programme carries its own status
+  - id: INV-015
+    rule: every freeze-blocker in the open-questions register carries an owner field and a due field
+  - id: INV-016
+    rule: no anchoring artefact is described as a qualified or eIDAS timestamp
 unverified_claims_policy: "IMPLEMENTED never implies VERIFIED"

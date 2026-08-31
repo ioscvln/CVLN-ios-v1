@@ -12,6 +12,7 @@ import RegistryPage from "@/pages/RegistryPage";
 import GraphPage from "@/pages/GraphPage";
 import KiltikonetPage from "@/pages/KiltikonetPage";
 import DriftPage from "@/pages/DriftPage";
+import OpenQuestionsPage from "@/pages/OpenQuestionsPage";
 import SystemsPage from "@/pages/SystemsPage";
 import SystemCardPage from "@/pages/SystemCardPage";
 
@@ -31,6 +32,7 @@ export default function App() {
         <Route path="/graph" element={<GraphPage />} />
         <Route path="/kiltikonet" element={<KiltikonetPage />} />
         <Route path="/drift" element={<DriftPage />} />
+        <Route path="/open-questions" element={<OpenQuestionsPage />} />
         <Route path="/systems" element={<SystemsPage />} />
         <Route path="/system/:name" element={<SystemCardPage />} />
         <Route path="/search" element={<SearchPage />} />

@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { apiGet } from "@/lib/api";
 import type { FreezeState } from "@/lib/freezeTypes";
 import { StatusBadge } from "@/components/StatusBadge";
+import { AnchorPanel } from "@/components/AnchorPanel";
 import type { EvidencePackage } from "@/lib/insightTypes";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -149,6 +150,8 @@ export default function FreezePage() {
           ))}
         </ul>
       </section>
+
+      <AnchorPanel baseline="v1.1" />
 
       <section className="mt-12 grid gap-8 lg:grid-cols-2">
         <div>

@@ -270,3 +270,51 @@ CHECKS += [
     ("INV-013", "No internal Markdown reference in the corpus is broken", inv_013),
     ("INV-014", "Every Kiltikonet programme carries its own status", inv_014),
 ]
+
+
+# --- PATCH-003 invariants (INV-015, INV-016) ------------------------------------------
+
+OPEN_QUESTIONS = "governance/OPEN-QUESTIONS.md"
+QUALIFIED_CLAIM = re.compile(
+    r"(qualified|eIDAS|legally opposable|opposable)[^.\n]{0,60}(timestamp|horodatage)"
+    r"|(timestamp|horodatage)[^.\n]{0,60}(qualified|eIDAS|opposable)",
+    re.IGNORECASE,
+)
+NEGATED = re.compile(
+    r"\b(not|never|no|non|pas|nor|without|instead of|rather than|reserved|future|"
+    r"requires|require|forbid|forbidden|cannot|neither)\b",
+    re.IGNORECASE,
+)
+
+
+def inv_015() -> tuple[bool, str]:
+    """Every freeze-blocker in the open-questions register carries an owner and a due field."""
+    columns, rows = corpus.parse_registry(OPEN_QUESTIONS, min_columns=9)
+    oi, di, ki = _col(columns, "owner"), _col(columns, "due"), _col(columns, "kind")
+    if min(oi, di, ki) < 0:
+        return False, "register is missing the Kind, Owner or Due column"
+    blockers = [r for r in rows if r[ki].strip() in {"freeze-blocker", "contradiction"}]
+    offenders = [r[0] for r in blockers if not r[oi].strip() or not r[di].strip()]
+    unassigned = sum(1 for r in blockers if r[oi].strip().upper() == "UNASSIGNED")
+    return not offenders and len(rows) > 0, (
+        f"questions={len(rows)}; blockers={len(blockers)}; unassigned_owners={unassigned}; "
+        f"missing_fields={offenders or 'none'}"
+    )
+
+
+def inv_016() -> tuple[bool, str]:
+    """No anchoring artefact is described as a qualified or eIDAS timestamp."""
+    offenders: list[str] = []
+    for path in corpus.all_docs():
+        for line in path.read_text(encoding="utf-8").splitlines():
+            if QUALIFIED_CLAIM.search(line) and not NEGATED.search(line):
+                offenders.append(f"{corpus.rel(path)}: {line.strip()[:70]}")
+                break
+    return not offenders, "offenders: " + (", ".join(offenders) if offenders else "none")
+
+
+CHECKS += [
+    ("INV-015", "Every freeze-blocker in the open-questions register carries an owner and a due field", inv_015),
+    ("INV-016", "No anchoring artefact is described as a qualified or eIDAS timestamp", inv_016),
+]
+REGISTRY_SOURCES += [(OPEN_QUESTIONS, 9)]

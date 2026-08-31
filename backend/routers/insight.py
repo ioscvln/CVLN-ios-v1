@@ -7,8 +7,11 @@ from datetime import datetime, timezone
 
 from fastapi import APIRouter, HTTPException
 
-from lib import baselines, corpus, invariants
+from lib import anchoring, baselines, corpus, invariants
 from models.insight import (
+    AnchorProviders,
+    AnchorRecord,
+    AnchorVerification,
     BaselineInfo,
     DriftReport,
     DriftRow,
@@ -117,6 +120,12 @@ async def export_package(baseline_id: str) -> EvidencePackage:
     chain_hash = hashlib.sha256(chain_input.encode()).hexdigest()
     signature, public_key = baselines.sign(chain_hash)
 
+    record = anchoring.anchor_for(chain_hash)
+    anchor = AnchorRecord(**record) if record else None
+    anchored_at = None
+    if record and record["status"] == "confirmed":
+        anchored_at = record.get("upgraded_at") or record.get("created_at")
+
     return EvidencePackage(
         package_id=f"EP-{data['id']}-{chain_hash[:12]}",
         subject=f"CVLN Intelligence OS baseline {data['id']}",
@@ -129,7 +138,9 @@ async def export_package(baseline_id: str) -> EvidencePackage:
         signature=signature,
         signature_algorithm="Ed25519",
         public_key=public_key,
-        anchored_at=None,
+        anchored_at=anchored_at,
+        anchor=anchor,
+        anchor_proof_ots_base64=anchoring.proof_b64(chain_hash) if record else None,
         legal_effect="none",
         verification=(
             "Recompute sha256 of each artefact at its path, rebuild the chain input as "
@@ -137,7 +148,10 @@ async def export_package(baseline_id: str) -> EvidencePackage:
             "claim lines, sha256 the result, then verify the Ed25519 signature over that "
             "hex digest with public_key. Any failing step rejects the whole package. "
             "This package is digital evidence and carries no legal effect "
-            "(proof/NOTARIAL-BOUNDARY.md)."
+            "(proof/NOTARIAL-BOUNDARY.md). When an anchor is attached, the OpenTimestamps "
+            "proof is independent evidence that chain_hash existed at anchoring time and "
+            "has not changed since; it is not a qualified or eIDAS timestamp. Verify it "
+            "with `ots verify <digest>.ots` against a Bitcoin node."
         ),
     )
 
@@ -227,3 +241,56 @@ async def get_system(name: str) -> SystemCard:
         relation_columns=rel_cols,
         documents=documents,
     )
+
+
+# ---------------------------------------------------------------- external anchoring
+
+ANCHOR_DISCLAIMER = (
+    "OpenTimestamps provides independent evidence of temporal existence and integrity "
+    "through Bitcoin calendars. It is not a qualified electronic timestamp and carries "
+    "no eIDAS legal effect. A qualified RFC 3161 authority can be added later alongside "
+    "it, never replacing it (proof/EXTERNAL-ANCHORING.md, D-020)."
+)
+
+
+@router.get("/anchor/providers", response_model=AnchorProviders)
+async def anchor_providers() -> AnchorProviders:
+    return AnchorProviders(
+        providers=anchoring.PROVIDERS,
+        calendars=anchoring.CALENDARS,
+        disclaimer=ANCHOR_DISCLAIMER,
+    )
+
+
+@router.get("/anchors", response_model=list[AnchorRecord])
+async def list_anchors() -> list[AnchorRecord]:
+    return [AnchorRecord(**r) for r in anchoring.load_index()]
+
+
+@router.post("/anchor/{baseline_id}", response_model=AnchorRecord)
+async def create_anchor(baseline_id: str, provider: str = "ots") -> AnchorRecord:
+    """Anchor the evidence-package chain hash of a baseline with an external provider."""
+    package = await export_package(baseline_id)
+    try:
+        record = await anchoring.anchor(
+            package.chain_hash, f"{package.package_id} ({package.subject})", provider
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc))
+    return AnchorRecord(**record)
+
+
+@router.post("/anchor/{digest}/upgrade", response_model=AnchorRecord)
+async def upgrade_anchor(digest: str) -> AnchorRecord:
+    try:
+        return AnchorRecord(**await anchoring.upgrade(digest))
+    except KeyError:
+        raise HTTPException(status_code=404, detail=f"no anchor for digest: {digest}")
+
+
+@router.get("/anchor/{digest}/verify", response_model=AnchorVerification)
+async def verify_anchor(digest: str) -> AnchorVerification:
+    result = anchoring.verify(digest)
+    if not result["parsed"] and result["detail"] == "no proof stored":
+        raise HTTPException(status_code=404, detail=f"no anchor proof for digest: {digest}")
+    return AnchorVerification(digest=digest.lower(), **result)

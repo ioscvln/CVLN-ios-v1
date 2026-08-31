@@ -49,6 +49,34 @@ class EvidenceClaim(BaseModel):
     evidence: str
 
 
+class AnchorRecord(BaseModel):
+    digest: str
+    subject: str
+    provider: str
+    provider_label: str
+    status: str  # pending | confirmed | offline | unavailable
+    calendar: str | None
+    created_at: str
+    upgraded_at: str | None
+    attempts: int
+    detail: str
+    proof_file: str | None
+    qualified_timestamp: bool
+
+
+class AnchorVerification(BaseModel):
+    digest: str
+    parsed: bool
+    bound_to_digest: bool
+    detail: str
+
+
+class AnchorProviders(BaseModel):
+    providers: dict[str, str]
+    calendars: list[str]
+    disclaimer: str
+
+
 class EvidencePackage(BaseModel):
     package_id: str
     subject: str
@@ -62,6 +90,8 @@ class EvidencePackage(BaseModel):
     signature_algorithm: str
     public_key: str
     anchored_at: str | None
+    anchor: AnchorRecord | None
+    anchor_proof_ots_base64: str | None
     legal_effect: str
     verification: str
 

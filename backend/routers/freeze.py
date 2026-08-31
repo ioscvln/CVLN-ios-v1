@@ -78,6 +78,12 @@ REGISTRIES: dict[str, dict] = {
         "columns": 6,
         "note": "Recorded, never resolved by fiat. Every row stays OPEN until a decision closes it.",
     },
+    "open-questions": {
+        "title": "Open Questions",
+        "source": "governance/OPEN-QUESTIONS.md",
+        "columns": 9,
+        "note": "Every open question, contradiction, unknown and undecided risk. Owner and Due are human-owned: UNASSIGNED and TBD mean exactly that.",
+    },
     "decisions": {
         "title": "Decision Registry",
         "source": "decisions/DECISION-REGISTRY.md",

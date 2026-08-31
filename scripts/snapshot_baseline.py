@@ -31,20 +31,32 @@ PATCH_ROWS = {
     *(f"continuity:K-{i:03d}" for i in range(9, 12)),
     *(f"legal:L-{i:03d}" for i in range(8, 12)),
     *(f"decisions:D-{i:03d}" for i in range(15, 19)),
-    # Added by PATCH-002-GOVERNANCE-TOOLING (audit/DRIFT-CONTROL.md, ADR-0019)
-    "decisions:D-019",
-    "vulnerability:V-013",
 }
 PATCH_REGISTRY_PREFIXES = ("kiltikonet-",)
+
+# Rows added by the later tooling patches (PATCH-002, PATCH-003)
+LATER_PATCH_ROWS = {
+    "decisions:D-019",
+    "vulnerability:V-013",
+    "decisions:D-020",
+    "decisions:D-021",
+}
+LATER_PATCH_PREFIXES = ("open-questions",)
 
 now = datetime.now(timezone.utc).isoformat(timespec="seconds")
 rows = baselines.snapshot_rows(REGISTRIES)
 
-frozen = {
-    key: value
-    for key, value in rows.items()
-    if key not in PATCH_ROWS and not key.startswith(PATCH_REGISTRY_PREFIXES)
-}
+def without(exclude_rows: set[str], exclude_prefixes: tuple[str, ...]) -> dict:
+    return {
+        key: value
+        for key, value in rows.items()
+        if key not in exclude_rows and not key.startswith(exclude_prefixes)
+    }
+
+
+all_excluded = PATCH_ROWS | LATER_PATCH_ROWS
+frozen = without(all_excluded, PATCH_REGISTRY_PREFIXES + LATER_PATCH_PREFIXES)
+patch1 = without(LATER_PATCH_ROWS, LATER_PATCH_PREFIXES)
 
 baselines.BASELINE_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -59,7 +71,14 @@ for baseline_id, label, provenance, payload in [
     (
         "v1.1-patch.1",
         "OS v1.1 + PATCH-001-KILTIKONET",
-        "snapshot of the Markdown corpus after PATCH-001-KILTIKONET",
+        "snapshot of the Markdown corpus after PATCH-001-KILTIKONET, excluding the rows "
+        "recorded as added by PATCH-002 and PATCH-003",
+        patch1,
+    ),
+    (
+        "v1.1-patch.3",
+        "OS v1.1 + PATCH-001..003",
+        "snapshot of the Markdown corpus after PATCH-003-ANCHORING-AND-OPEN-QUESTIONS",
         rows,
     ),
 ]:

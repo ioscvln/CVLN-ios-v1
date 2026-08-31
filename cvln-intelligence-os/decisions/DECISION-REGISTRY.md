@@ -36,6 +36,8 @@ observed.
 | D-017 | Absence of evidence of integration is recorded as UNKNOWN, never as absence of relation | Ecosystem membership never implies a technical integration | ARCHITECTURE | kiltikonet/RELATIONS-REGISTRY.md | DECIDED | kiltikonet/ | ADR-0017 |
 | D-018 | Estate governance does not currently reach Kiltikonet | No OS integration is observed; governance coverage is a TARGET, not a fact | GOVERNANCE | relations KR-008, KR-009, KR-016 | DECIDED | kiltikonet/, registry/ | ADR-0018 |
 | D-019 | Baseline snapshots and evidence-package export are derived artefacts | Snapshots and packages are recomputed from the Markdown corpus; they never become a second source of truth | ARCHITECTURE | backend/lib/baselines.py, backend/routers/insight.py | IMPLEMENTED | proof/, audit/baselines/ | ADR-0019 |
+| D-020 | External anchoring is independent temporal evidence, never a qualified timestamp | OpenTimestamps proves that a digest existed and is unchanged; legal qualification requires a separate qualified authority | ARCHITECTURE | backend/lib/anchoring.py, audit/anchors/index.json | DECIDED | proof/ | ADR-0020 |
+| D-021 | Open questions are a governed register with human-owned ownership fields | Owner and Due are never generated; UNASSIGNED and TBD are truthful values, not placeholders to be filled by a tool | GOVERNANCE | governance/OPEN-QUESTIONS.md, scripts/gen_open_questions.py | DECIDED | governance/ | ADR-0021 |
 
 
 ## Status vocabulary (canonical, v1.1)

@@ -17,6 +17,7 @@ const NAV = [
   { to: "/kiltikonet", label: "Kiltikonet", testId: "nav-kiltikonet" },
   { to: "/systems", label: "System Cards", testId: "nav-systems" },
   { to: "/drift", label: "Drift Control", testId: "nav-drift" },
+  { to: "/open-questions", label: "Open Questions", testId: "nav-questions" },
   { to: "/architecture", label: "Current vs Target", testId: "nav-architecture" },
   { to: "/search", label: "Search", testId: "nav-search" },
 ];

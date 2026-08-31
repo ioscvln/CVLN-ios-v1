@@ -59,8 +59,38 @@ export interface EvidencePackage {
   signature_algorithm: string;
   public_key: string;
   anchored_at: string | null;
+  anchor: AnchorRecord | null;
+  anchor_proof_ots_base64: string | null;
   legal_effect: string;
   verification: string;
+}
+
+export interface AnchorRecord {
+  digest: string;
+  subject: string;
+  provider: string;
+  provider_label: string;
+  status: string;
+  calendar: string | null;
+  created_at: string;
+  upgraded_at: string | null;
+  attempts: number;
+  detail: string;
+  proof_file: string | null;
+  qualified_timestamp: boolean;
+}
+
+export interface AnchorVerification {
+  digest: string;
+  parsed: boolean;
+  bound_to_digest: boolean;
+  detail: string;
+}
+
+export interface AnchorProviders {
+  providers: Record<string, string>;
+  calendars: string[];
+  disclaimer: string;
 }
 
 export interface SystemSummary {
