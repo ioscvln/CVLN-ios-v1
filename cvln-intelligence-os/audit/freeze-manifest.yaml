@@ -22,6 +22,14 @@ status_vocabulary:
   - UNKNOWN
   - DEPRECATED
   - REJECTED
+  - HISTORICAL
+  - OPEN
+post_freeze_patches:
+  - id: PATCH-001-KILTIKONET
+    record: audit/PATCH-001-KILTIKONET.md
+    report: audit/KILTIKONET-AUDIT-REPORT.md
+    type: completeness
+    freeze_rewritten: false
 sections_added:
   - decisions
   - security
@@ -30,7 +38,13 @@ sections_added:
   - proof
   - economics
   - registry
+  - kiltikonet
 registries:
+  kiltikonet-relations: kiltikonet/RELATIONS-REGISTRY.md
+  kiltikonet-programmes: kiltikonet/PROGRAMMES-REGISTRY.md
+  kiltikonet-data: kiltikonet/DATA-FLOWS.md
+  kiltikonet-identity: kiltikonet/IDENTITY-RECONCILIATION.md
+  kiltikonet-contradictions: kiltikonet/CONTRADICTIONS-KILTIKONET.md
   ecosystem: registry/ECOSYSTEM-REGISTRY.md
   component: audit/COMPONENT-MATRIX.md
   vulnerability: registry/VULNERABILITY-REGISTRY.md
@@ -54,4 +68,16 @@ invariants:
     rule: no v1.0 document was deleted
   - id: INV-008
     rule: every registry row has exactly one status cell
+  - id: INV-009
+    rule: Kiltikonet exists in the ecosystem registry
+  - id: INV-010
+    rule: the Kiltikonet system card exists and is reachable
+  - id: INV-011
+    rule: every Kiltikonet relation row is traceable and evidence-backed
+  - id: INV-012
+    rule: Kiltikonet historical contradictions are recorded and open
+  - id: INV-013
+    rule: no internal Markdown reference added after v1.0 is broken (v1.0 links are frozen and reported only)
+  - id: INV-014
+    rule: every Kiltikonet programme carries its own status
 unverified_claims_policy: "IMPLEMENTED never implies VERIFIED"

@@ -113,3 +113,54 @@ Registries, Traceability.
   PRIVATE / NOT VISIBLE).
 
 No auth, no credentials: the portal stays public and read-only.
+
+---
+
+## PATCH-001-KILTIKONET — post-freeze completeness patch (v1.1-patch.1)
+
+Corpus: **145 documents** (87 v1.0 intact, v1.1 intact, 19 added by this patch).
+The v1.1 freeze text (`constitution/FREEZE-001.md`, `audit/FREEZE-REPORT-v1.1.md`) is
+unchanged; the patch is registered in `audit/freeze-manifest.yaml` under
+`post_freeze_patches`.
+
+Audited source: https://github.com/cultureconnectorg/Kiltikonet-Aout2026 (main, 747
+commits) — README.md + KILTIKONET_DOCUMENTATION.md. Nothing outside those two documents
+is asserted: absent facts are `UNKNOWN` / `OPEN` / SOURCE TO RECONCILE.
+
+### Added
+- `kiltikonet/` (12 docs): KILTIKONET-SYSTEM (system card), IDENTITY-RECONCILIATION,
+  RELATIONS-REGISTRY, PROGRAMMES-REGISTRY, DATA-FLOWS, CONTRADICTIONS-KILTIKONET,
+  NETWORK-MODEL, LICENCE-BRAND-MODEL, ECONOMIC-MODEL, GOVERNANCE, SECURITY, CONTINUITY,
+  LEGAL.
+- `decisions/ADR-0015-D-015.md` … `ADR-0018-D-018.md`, `audit/PATCH-001-KILTIKONET.md`,
+  `audit/KILTIKONET-AUDIT-REPORT.md`.
+- Appended registry rows: ecosystem +3 (Kiltikonet, Culture Connect 2026, Factory Maker
+  Studio), vulnerability V-009…V-012, continuity K-009…K-011, legal L-008…L-011,
+  decisions D-015…D-018. Vocabulary extended with `HISTORICAL` and `OPEN`.
+- `scripts/gen_kiltikonet_patch.py` regenerates the patch idempotently.
+
+### New invariants (INV-001…INV-008 unchanged)
+INV-009 Kiltikonet in ecosystem registry · INV-010 system card exists and is indexed ·
+INV-011 relations traceable and evidence-backed · INV-012 Kiltikonet contradictions
+recorded and OPEN · INV-013 no broken internal link among post-v1.0 documents (48 legacy
+v1.0 broken links are reported, not repaired — v1.0 is frozen) · INV-014 each programme
+carries its own status. `python scripts/check_freeze_invariants.py` → 14/14.
+
+### API additions
+Registry keys `kiltikonet-relations`, `kiltikonet-programmes`, `kiltikonet-data`,
+`kiltikonet-identity`, `kiltikonet-contradictions` on `/api/docs/registry/{key}` and
+`/api/docs/registries`. `/api/docs/graph` now also emits Kiltikonet relation edges
+(139 nodes / 95 declared edges). Corpus section `kiltikonet` added to `SECTION_ORDER`.
+
+### Portal
+New page `/kiltikonet` (nav `Kiltikonet`): identity reconciliation, relations,
+programmes, data flows, contradictions, plus the rendered system card and links to the
+audit report and patch record.
+
+### Frozen positions taken by the patch
+- No legal identity selected: association / réseau / Network SAS remain `UNKNOWN`.
+- The Kiltikonet "jeton" is **not** merged with JCC (D-016); KC-001/KC-002 stay `OPEN`.
+- `UNKNOWN` = not evidenced, never absent (D-017). Estate governance does not reach
+  Kiltikonet today (D-018).
+- Historical snapshot counters (48 badges, 30 registered, 20 scans…) are `HISTORICAL`
+  and never rendered as live KPIs.

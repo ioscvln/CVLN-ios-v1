@@ -24,6 +24,9 @@ One row per system of the estate. `Must Not Own` is binding: a system found owni
 | Wallet | Layer 4 | Value and accounting surface | — | META adapter returns upstream 404 | REFERENCED | accounting surface | legal currency issuance |
 | CVLN Academy | Layer 4 | Learning surface | — | no evidence in audited repositories | UNKNOWN | unknown | unknown |
 | Proof Layer | Cross-cutting | Digital evidence packaging and verification | META | notarizations, signed event bus | PARTIAL | digital evidence | legal attestation |
+| Kiltikonet | Layer 4 | Sovereign cultural platform operating Culture Connect 2026 (accreditation, NFC badges, payments, cultural AI) | KILT | KILT repo: README.md | IMPLEMENTED | accreditation, badges, jetons ledger, event data | doctrine, agent runtime, legal currency issuance |
+| Culture Connect 2026 | Layer 4 · programme | Event operated on the Kiltikonet platform | KILT | KILT repo: KILTIKONET_DOCUMENTATION.md | OBSERVED | event scope | platform architecture |
+| Factory Maker Studio (EURL) | Layer -1 | Named organiser entity of CC2026 alongside CVLN Group | KILT | KILT repo: KILTIKONET_DOCUMENTATION.md | OBSERVED | organiser mandate | runtime execution, doctrine |
 
 ## Status vocabulary (canonical, v1.1)
 

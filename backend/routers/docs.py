@@ -26,6 +26,7 @@ SECTION_LABELS = {
     "root": "Repository",
     "decisions": "Decisions · ADR",
     "registry": "Registries",
+    "kiltikonet": "Kiltikonet",
     "security": "Security",
     "resilience": "Resilience & Continuity",
     "legal": "Legal-by-Design",

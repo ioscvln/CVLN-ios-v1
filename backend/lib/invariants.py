@@ -163,3 +163,110 @@ def run_all() -> list[dict]:
             passed, detail = False, f"check error: {exc}"
         out.append({"id": inv_id, "rule": rule, "passed": passed, "detail": detail})
     return out
+
+
+# --- PATCH-001-KILTIKONET invariants (INV-009 … INV-014) ------------------------------
+
+KILT_SYSTEM_CARD = "kiltikonet/KILTIKONET-SYSTEM.md"
+KILT_REGISTRIES = [
+    ("kiltikonet/RELATIONS-REGISTRY.md", 7),
+    ("kiltikonet/PROGRAMMES-REGISTRY.md", 6),
+    ("kiltikonet/DATA-FLOWS.md", 6),
+    ("kiltikonet/IDENTITY-RECONCILIATION.md", 8),
+    ("kiltikonet/CONTRADICTIONS-KILTIKONET.md", 6),
+]
+LINK_RE = re.compile(r"\]\(([^)\s#]+\.md)[^)]*\)")
+
+
+def inv_009() -> tuple[bool, str]:
+    """Kiltikonet exists in the ecosystem registry."""
+    columns, rows = corpus.parse_registry("registry/ECOSYSTEM-REGISTRY.md", min_columns=8)
+    si = _col(columns, "status")
+    match = [r for r in rows if r[0].strip().lower() == "kiltikonet"]
+    ok = len(match) == 1 and si >= 0 and bool(match[0][si].strip())
+    status = match[0][si] if match and si >= 0 else "absent"
+    return ok, f"ecosystem_rows={len(rows)}; kiltikonet_status={status}"
+
+
+def inv_010() -> tuple[bool, str]:
+    """The Kiltikonet system card exists and is reachable."""
+    path = corpus.CORPUS_ROOT / KILT_SYSTEM_CARD
+    exists = path.exists()
+    words = len(path.read_text(encoding="utf-8").split()) if exists else 0
+    indexed = any(e["path"] == KILT_SYSTEM_CARD for e in corpus.corpus_index())
+    return exists and indexed and words > 200, f"exists={exists}; indexed={indexed}; words={words}"
+
+
+def inv_011() -> tuple[bool, str]:
+    """Every Kiltikonet relation row is traceable and evidence-backed."""
+    columns, rows = corpus.parse_registry("kiltikonet/RELATIONS-REGISTRY.md", min_columns=7)
+    si, ei = _col(columns, "status"), _col(columns, "evidence")
+    offenders: list[str] = []
+    for row in rows:
+        if not row[1].strip() or not row[2].strip() or not row[si].strip():
+            offenders.append(f"{row[0]}:incomplete")
+        elif row[si].strip().upper() in STRONG and row[ei].strip().lower() in EMPTY_EVIDENCE:
+            offenders.append(f"{row[0]}:unevidenced-{row[si].strip()}")
+    return not offenders and len(rows) > 0, f"relations={len(rows)}; offenders={offenders or 'none'}"
+
+
+def inv_012() -> tuple[bool, str]:
+    """Kiltikonet historical contradictions are recorded and open."""
+    columns, rows = corpus.parse_registry("kiltikonet/CONTRADICTIONS-KILTIKONET.md", min_columns=6)
+    si = _col(columns, "status")
+    closed = [r[0] for r in rows if si >= 0 and r[si].strip().upper() != "OPEN"]
+    return len(rows) > 0 and not closed, f"contradictions={len(rows)}; not_open={closed or 'none'}"
+
+
+def inv_013() -> tuple[bool, str]:
+    """No internal Markdown reference added after v1.0 is broken."""
+    inventory = {
+        line.strip()
+        for line in (corpus.CORPUS_ROOT / "audit/v10-inventory.txt")
+        .read_text(encoding="utf-8")
+        .splitlines()
+        if line.strip() and not line.startswith("#")
+    }
+    broken: list[str] = []
+    legacy = 0
+    for path in corpus.all_docs():
+        if corpus.rel(path) in inventory:
+            # v1.0 documents are frozen: their links are reported, never edited here.
+            legacy += sum(
+                1
+                for target in LINK_RE.findall(path.read_text(encoding="utf-8"))
+                if not target.startswith("http") and not (path.parent / target).resolve().exists()
+            )
+            continue
+        text = path.read_text(encoding="utf-8")
+        for target in LINK_RE.findall(text):
+            if target.startswith("http"):
+                continue
+            resolved = (path.parent / target).resolve()
+            if not resolved.exists():
+                broken.append(f"{corpus.rel(path)} -> {target}")
+    return not broken, f"broken_links_post_v1.0={len(broken)}; legacy_v1.0_broken={legacy} (frozen, reported only); {broken[:5] or 'none'}"
+
+
+def inv_014() -> tuple[bool, str]:
+    """Every Kiltikonet programme carries its own status."""
+    columns, rows = corpus.parse_registry("kiltikonet/PROGRAMMES-REGISTRY.md", min_columns=6)
+    si, ei = _col(columns, "status"), _col(columns, "evidence")
+    offenders = [
+        r[0]
+        for r in rows
+        if not r[si].strip()
+        or (r[si].strip().upper() in STRONG and r[ei].strip().lower() in EMPTY_EVIDENCE)
+    ]
+    return len(rows) > 0 and not offenders, f"programmes={len(rows)}; offenders={offenders or 'none'}"
+
+
+REGISTRY_SOURCES += KILT_REGISTRIES
+CHECKS += [
+    ("INV-009", "Kiltikonet exists in the ecosystem registry", inv_009),
+    ("INV-010", "The Kiltikonet system card exists and is reachable", inv_010),
+    ("INV-011", "Every Kiltikonet relation row is traceable and evidence-backed", inv_011),
+    ("INV-012", "Kiltikonet historical contradictions are recorded and open", inv_012),
+    ("INV-013", "No internal Markdown reference in the corpus is broken", inv_013),
+    ("INV-014", "Every Kiltikonet programme carries its own status", inv_014),
+]

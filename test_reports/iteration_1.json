@@ -1,0 +1,117 @@
+{
+  "iteration": 1,
+  "mode": "generate",
+  "summary": "All 8 acceptance-matrix criteria exercised: 12 backend pytest cases (5 files) + 7 browser checks (one run twice, once on localhost and once through the public APP_URL ingress). Everything passed: 14/14 freeze invariants confirmed via scripts/check_freeze_invariants.py, API, and UI; all 5 Kiltikonet registries (17/13/10/8/6 rows) verified server-side and rendered client-side; contradiction register OPEN with KC-001 present; v1.0 corpus (145 docs, 87 v1.0 docs) and freeze text untouched with no Kiltikonet mentions; patch/audit docs and 18 decisions (D-015..D-018) traceable with working ADR links; existing v1.1 views (overview, matrix, gaps, architecture, graph, search) load with zero HTTP >= 400 and render Mermaid SVG + counts.",
+  "passed": 19,
+  "failed": 0,
+  "bugs": [],
+  "action_items": [],
+  "retest_needed": false,
+  "checks": [
+    {
+      "criterion": "All 14 freeze invariants hold and none is hardcoded",
+      "name": "scripts/check_freeze_invariants.py (CLI)",
+      "lane": "backend",
+      "status": "passed",
+      "evidence": "cd /app && python scripts/check_freeze_invariants.py -> exit 0; '14/14 invariants hold', all PASS including INV-009..INV-014"
+    },
+    {
+      "criterion": "Kiltikonet registries are served by the API and browsable",
+      "name": "test_tscheck_kiltikonet_registries.py::test_registries_list_includes_kiltikonet_keys",
+      "lane": "backend",
+      "status": "passed",
+      "evidence": "GET /api/docs/registries -> 200; keys kiltikonet-relations=17, kiltikonet-programmes=13, kiltikonet-data=10, kiltikonet-identity=8, kiltikonet-contradictions=6"
+    },
+    {
+      "criterion": "Kiltikonet registries are served by the API and browsable",
+      "name": "test_tscheck_kiltikonet_registries.py::test_each_kiltikonet_registry_is_browsable + test_unknown_registry_key_returns_404",
+      "lane": "backend",
+      "status": "passed",
+      "evidence": "GET /api/docs/registry/<key> -> 200 with matching row counts for all 5 keys; GET /api/docs/registry/does-not-exist-tscheck -> 404"
+    },
+    {
+      "criterion": "All 14 freeze invariants hold and none is hardcoded",
+      "name": "test_tscheck_freeze_invariants.py::test_stats_endpoint_reports_all_invariants_passed",
+      "lane": "backend",
+      "status": "passed",
+      "evidence": "GET /api/docs/stats -> 200; invariants_total=14, invariants_passed=14"
+    },
+    {
+      "criterion": "No unproven status promotion: rows without evidence never read IMPLEMENTED or VERIFIED",
+      "name": "test_tscheck_freeze_invariants.py::test_no_unproven_status_promotion_in_relations_and_programmes",
+      "lane": "backend",
+      "status": "passed",
+      "evidence": "GET /api/docs/registry/kiltikonet-relations and kiltikonet-programmes -> 200; every row with Evidence in ('none','') has Status in {UNKNOWN, TARGET}"
+    },
+    {
+      "criterion": "Historical contradictions are recorded and remain OPEN",
+      "name": "test_tscheck_freeze_invariants.py::test_contradictions_remain_open_and_include_kc001",
+      "lane": "backend",
+      "status": "passed",
+      "evidence": "GET /api/docs/registry/kiltikonet-contradictions -> 200; 6 rows all Status=OPEN; KC-001 present"
+    },
+    {
+      "criterion": "v1.0 corpus and the v1.1 freeze text are untouched",
+      "name": "test_tscheck_v1_corpus_untouched.py::test_total_documents_is_145 + test_freeze_documents_load_and_omit_kiltikonet",
+      "lane": "backend",
+      "status": "passed",
+      "evidence": "GET /api/docs/stats -> total_documents=145; GET /api/docs/file?path=constitution/FREEZE-001.md and audit/FREEZE-REPORT-v1.1.md -> 200, neither mentions 'kiltikonet'"
+    },
+    {
+      "criterion": "Patch is traceable as post-freeze with its decisions",
+      "name": "test_tscheck_patch_traceability.py::test_patch_and_audit_report_documents_load + test_decisions_registry_has_18_including_d015_to_d018",
+      "lane": "backend",
+      "status": "passed",
+      "evidence": "GET /api/docs/file?path=audit/PATCH-001-KILTIKONET.md and audit/KILTIKONET-AUDIT-REPORT.md -> 200; GET /api/docs/registry/decisions -> 200, 18 rows including D-015..D-018"
+    },
+    {
+      "criterion": "Existing v1.1 views still work (no regression)",
+      "name": "test_tscheck_v11_views_no_regression.py::test_stats_matrix_gaps_architecture_graph_endpoints_ok",
+      "lane": "backend",
+      "status": "passed",
+      "evidence": "GET /api/docs/stats, /api/docs/registry/component, /api/docs/graph all -> 200; graph total_nodes=139, total_edges=95"
+    },
+    {
+      "criterion": "Kiltikonet is represented as a full system in the portal, not a single registry line",
+      "name": "kiltikonet-system-page-tables",
+      "lane": "browser",
+      "status": "passed",
+      "evidence": "nav-kiltikonet -> /kiltikonet; identity table 8 rows, relations table 17 rows, programmes table 13 rows, data-flows table 10 rows, contradictions table 6 rows, plus non-empty rendered system-card markdown"
+    },
+    {
+      "criterion": "Kiltikonet is represented as a full system in the portal, not a single registry line",
+      "name": "kiltikonet-system-page-tables-public-url",
+      "lane": "browser",
+      "status": "passed",
+      "evidence": "Same flow re-run against public ingress https://os-architecture-1.preview.emergentagent.com; relations=17 rows, contradictions=6 rows rendered"
+    },
+    {
+      "criterion": "Kiltikonet registries are served by the API and browsable",
+      "name": "registry-kiltikonet-relations-filters",
+      "lane": "browser",
+      "status": "passed",
+      "evidence": "/registry/kiltikonet-relations shows tabbed table with 17 rows and row-count badge '17'; switching to kiltikonet-programmes tab shows 13 rows; status-all filter functional"
+    },
+    {
+      "criterion": "All 14 freeze invariants hold and none is hardcoded",
+      "name": "freeze-page-14-invariants-no-violations",
+      "lane": "browser",
+      "status": "passed",
+      "evidence": "/freeze renders 14 <li> invariant entries, zero elements containing text 'VIOLATED', INV-009..INV-014 all visible"
+    },
+    {
+      "criterion": "Patch is traceable as post-freeze with its decisions",
+      "name": "decisions-page-lists-18-with-adr-links",
+      "lane": "browser",
+      "status": "passed",
+      "evidence": "/decisions renders 18 decision cards including D-015..D-018; clicking ADR link for D-015 opens a non-empty /doc page; /doc?path=audit/PATCH-001-KILTIKONET.md and audit/KILTIKONET-AUDIT-REPORT.md both render non-empty content"
+    },
+    {
+      "criterion": "Existing v1.1 views still work (no regression)",
+      "name": "v11-views-no-regression",
+      "lane": "browser",
+      "status": "passed",
+      "evidence": "Overview, /matrix, /gaps, /architecture, /graph (svg + counts visible), /search all navigated with zero HTTP>=400 responses captured across the whole flow"
+    }
+  ]
+}

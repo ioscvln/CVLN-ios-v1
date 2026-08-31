@@ -31,6 +31,10 @@ observed.
 | D-012 | One status per row | Every registry row carries exactly one status and one evidence cell | GOVERNANCE | registry/ | DECIDED | registries | ADR-0012 |
 | D-013 | Traceability is mandatory | Every gap, decision and vulnerability links to at least one component or system node | GOVERNANCE | registry/ | DECIDED | whole corpus | ADR-0013 |
 | D-014 | Freeze is verifiable by machine | Invariants are executable assertions over the corpus, not prose | GOVERNANCE | scripts/check_freeze_invariants.py | DECIDED | whole corpus | ADR-0014 |
+| D-015 | Kiltikonet is a layer-4 system of the estate with an unattested legal identity | The platform is observable and operating; its legal identity is not attested in any audited source | GOVERNANCE | KILT repo: README.md, KILT repo: KILTIKONET_DOCUMENTATION.md | DECIDED | kiltikonet/ | ADR-0015 |
+| D-016 | The Kiltikonet jeton is not reconciled with JCC by this patch | One source calls it a digital currency, D-008 forbids that reading; the conflict is recorded, not resolved | ECONOMIC | kiltikonet/CONTRADICTIONS-KILTIKONET.md | DECIDED | economics/, kiltikonet/ | ADR-0016 |
+| D-017 | Absence of evidence of integration is recorded as UNKNOWN, never as absence of relation | Ecosystem membership never implies a technical integration | ARCHITECTURE | kiltikonet/RELATIONS-REGISTRY.md | DECIDED | kiltikonet/ | ADR-0017 |
+| D-018 | Estate governance does not currently reach Kiltikonet | No OS integration is observed; governance coverage is a TARGET, not a fact | GOVERNANCE | relations KR-008, KR-009, KR-016 | DECIDED | kiltikonet/, registry/ | ADR-0018 |
 
 
 ## Status vocabulary (canonical, v1.1)

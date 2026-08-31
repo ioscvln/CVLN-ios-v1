@@ -13,6 +13,8 @@ export const STATUS_TOKENS: Record<string, string> = {
   DECIDED: "bg-sky-950/70 text-sky-300 border-sky-800/80",
   OBSERVED: "bg-teal-950/70 text-teal-300 border-teal-800/80",
   VERIFIED: "bg-green-950/70 text-green-300 border-green-700/80",
+  HISTORICAL: "bg-stone-900/70 text-stone-300 border-stone-600/80 border-dotted",
+  OPEN: "bg-orange-950/70 text-orange-300 border-orange-700/90 border-dashed",
   DEPRECATED: "bg-zinc-900/70 text-zinc-400 border-zinc-700/80",
   REJECTED: "bg-rose-950/70 text-rose-300 border-rose-800/80",
   UNKNOWN: "bg-neutral-900/70 text-neutral-400 border-neutral-700/80 border-dotted",
@@ -34,6 +36,8 @@ export const STATUS_ORDER = [
   "PRIVATE / NOT VISIBLE",
   "PROPOSED",
   "TARGET",
+  "OPEN",
+  "HISTORICAL",
   "UNKNOWN",
 ];
 

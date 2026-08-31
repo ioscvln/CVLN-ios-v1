@@ -17,6 +17,7 @@ SECTION_ORDER = [
     "constitution",
     "decisions",
     "registry",
+    "kiltikonet",
     "security",
     "resilience",
     "legal",

@@ -22,6 +22,9 @@ One row per continuity-relevant capability. A cell describes intended behaviour;
 | K-006 | Evidence packaging | Available | Available | Local hashing only, no anchoring | Anchor backlog flush | none | TARGET |
 | K-007 | Power-loss durability of journals | Durable | Durable | Durable append-only spool | Integrity scan on boot | none | TARGET |
 | K-008 | Documentation portal | Available | Available | Static corpus read from disk | No recovery step required | backend/lib/corpus.py | IMPLEMENTED |
+| K-009 | Kiltikonet field scanning | Online scan with immediate write | Queued scan, deferred sync | Offline-first PWA queue in IndexedDB | Background Sync flush on reconnect | KILT repo: KILTIKONET_DOCUMENTATION.md: 'MODE OFFLINE (PWA)' | IMPLEMENTED |
+| K-010 | Kiltikonet payments and jetons | Stripe live | Refused, no local credit | Unavailable | Webhook reconciliation on reconnect | KILT repo: KILTIKONET_DOCUMENTATION.md: Stripe webhook endpoint | PARTIAL |
+| K-011 | Kiltikonet data durability across power loss on field devices | Durable server-side | Durable server-side | Client-side queue only | Integrity scan on flush | none | TARGET |
 
 ## Status vocabulary (canonical, v1.1)
 

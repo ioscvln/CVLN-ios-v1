@@ -21,6 +21,10 @@ Architecture documentation, not legal advice. `TARGET` rows state constraints th
 | L-005 | Monetary and payment regulation | Internal units must not be presented as currency or payment instrument | JCC constrained as internal accounting unit | none | TARGET | FREKCORE | D-008 |
 | L-006 | Intellectual property of cultural artifacts | Rights chain per artifact | Artifact records carry rights provenance | none | TARGET | Laurentia | D-009 |
 | L-007 | Cross-border transfer | Transfer conditions per jurisdiction | Provider routing constrained by jurisdiction tag | none | TARGET | MetaCVLN | D-009 |
+| L-008 | Corporate identity | The operating entity of a platform holding personal data must be identifiable | One attested legal entity per platform, recorded in the registry | none | OPEN | CVLN Group | D-015 |
+| L-009 | Monetary and payment regulation | An internal unit sold through a live payment processor requires qualification | Qualify the jeton before any further sale; never present JCC as currency | KILT repo: KILTIKONET_DOCUMENTATION.md: jeton packs, Stripe live | OPEN | Counsel | D-016 |
+| L-010 | Personal data (participants, badges, scans) | Lawful basis, minimisation, retention, and controls on any mirror | Authoritative store declared; mirror scoped and documented | KILT repo: README.md: MongoDB Atlas + Baserow mirror | TARGET | Kiltikonet | D-018 |
+| L-011 | Brand and IP | Ownership of the Kiltikonet brand and platform IP must be attested | Single documented owner; licence chain recorded | KILT repo: README.md: 'Propriétaire — Culture Connect / Kiltikonet.fr' | OPEN | CVLN Group | D-015 |
 
 ## Status vocabulary (canonical, v1.1)
 

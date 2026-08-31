@@ -48,6 +48,36 @@ REGISTRIES: dict[str, dict] = {
         "columns": 8,
         "note": "Obligation domains mapped to design constraints. Architecture documentation, not legal advice.",
     },
+    "kiltikonet-relations": {
+        "title": "Kiltikonet Relations",
+        "source": "kiltikonet/RELATIONS-REGISTRY.md",
+        "columns": 7,
+        "note": "An edge exists only where an artefact declares it. UNKNOWN means not evidenced, never absent (D-017).",
+    },
+    "kiltikonet-programmes": {
+        "title": "Kiltikonet Programmes",
+        "source": "kiltikonet/PROGRAMMES-REGISTRY.md",
+        "columns": 6,
+        "note": "One row per programme, one status per row. No programme inherits another's status.",
+    },
+    "kiltikonet-data": {
+        "title": "Kiltikonet Data Flows",
+        "source": "kiltikonet/DATA-FLOWS.md",
+        "columns": 6,
+        "note": "SOURCE to DATA to DESTINATION with status and evidence.",
+    },
+    "kiltikonet-identity": {
+        "title": "Kiltikonet Identity Reconciliation",
+        "source": "kiltikonet/IDENTITY-RECONCILIATION.md",
+        "columns": 8,
+        "note": "All candidate legal identities preserved side by side. None is selected by the patch.",
+    },
+    "kiltikonet-contradictions": {
+        "title": "Kiltikonet Contradictions",
+        "source": "kiltikonet/CONTRADICTIONS-KILTIKONET.md",
+        "columns": 6,
+        "note": "Recorded, never resolved by fiat. Every row stays OPEN until a decision closes it.",
+    },
     "decisions": {
         "title": "Decision Registry",
         "source": "decisions/DECISION-REGISTRY.md",
@@ -181,6 +211,19 @@ async def get_graph() -> TraceGraph:
         ref = row[7].strip()
         if f"dec:{ref}" in nodes:
             edges.append(GraphEdge(source=lid, target=f"dec:{ref}", kind="governed_by"))
+
+    kil = _load("kiltikonet-relations")
+    for row in kil.rows:
+        src = add(f"sys:{row[1]}", row[1], "system", "IMPLEMENTED")
+        tgt_id = f"sys:{row[2]}"
+        if tgt_id not in nodes:
+            add(tgt_id, row[2], "kiltikonet-relation", row[kil.status_column])
+        edges.append(
+            GraphEdge(source=src, target=tgt_id, kind=f"{row[0]} {row[kil.status_column]}")
+        )
+        ref = row[6].strip()
+        if f"dec:{ref}" in nodes:
+            edges.append(GraphEdge(source=f"sys:{row[1]}", target=f"dec:{ref}", kind="governed_by"))
 
     gap_cols, gap_rows = corpus.parse_registry("audit/GAP-ANALYSIS.md", min_columns=10)
     for row in gap_rows:

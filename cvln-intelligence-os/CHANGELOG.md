@@ -53,3 +53,13 @@ and `rfc/RFC-0007-BASELINE-FREEZE.md` (decision D-005).
   `legal/`, `proof/`, `economics/`, `registry/`.
 - Added `audit/freeze-manifest.yaml` and `audit/FREEZE-REPORT-v1.1.md`.
 - No v1.0 document deleted, moved or rewritten. This CHANGELOG entry is an append.
+
+## v1.1-patch.1 — PATCH-001-KILTIKONET (post-freeze completeness patch)
+
+Registered in `audit/freeze-manifest.yaml` under `post_freeze_patches`. The v1.1 freeze
+text is unchanged; this patch is not part of the original freeze.
+
+- Added the `kiltikonet/` section (12 documents) and `audit/KILTIKONET-AUDIT-REPORT.md`.
+- Added decisions D-015…D-018 with ADRs, and invariants INV-009…INV-014.
+- Appended rows to the ecosystem, vulnerability, continuity, legal and decision
+  registries. No v1.0 document was touched.

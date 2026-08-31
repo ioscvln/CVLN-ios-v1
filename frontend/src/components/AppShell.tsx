@@ -13,6 +13,7 @@ const NAV = [
   { to: "/decisions", label: "Decisions", testId: "nav-decisions" },
   { to: "/registry/ecosystem", label: "Registries", testId: "nav-registries" },
   { to: "/graph", label: "Traceability", testId: "nav-graph" },
+  { to: "/kiltikonet", label: "Kiltikonet", testId: "nav-kiltikonet" },
   { to: "/architecture", label: "Current vs Target", testId: "nav-architecture" },
   { to: "/search", label: "Search", testId: "nav-search" },
 ];
