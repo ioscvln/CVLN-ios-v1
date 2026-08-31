@@ -30,6 +30,11 @@ post_freeze_patches:
     report: audit/KILTIKONET-AUDIT-REPORT.md
     type: completeness
     freeze_rewritten: false
+  - id: PATCH-002-GOVERNANCE-TOOLING
+    record: audit/DRIFT-CONTROL.md
+    decision: decisions/ADR-0019-D-019.md
+    type: tooling
+    freeze_rewritten: false
 sections_added:
   - decisions
   - security

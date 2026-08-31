@@ -3,6 +3,9 @@ import { useQuery } from "@tanstack/react-query";
 import { apiGet } from "@/lib/api";
 import type { FreezeState } from "@/lib/freezeTypes";
 import { StatusBadge } from "@/components/StatusBadge";
+import type { EvidencePackage } from "@/lib/insightTypes";
+import { useState } from "react";
+import { toast } from "sonner";
 
 function Stat({ value, label, testId }: { value: string | number; label: string; testId: string }) {
   return (
@@ -20,6 +23,29 @@ export default function FreezePage() {
     queryKey: ["docs", "freeze"],
     queryFn: () => apiGet<FreezeState>("/docs/freeze"),
   });
+
+  const [exporting, setExporting] = useState(false);
+
+  async function downloadPackage() {
+    setExporting(true);
+    try {
+      const pkg = await apiGet<EvidencePackage>("/docs/export/v1.1");
+      const blob = new Blob([JSON.stringify(pkg, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${pkg.package_id}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      toast.success(`Evidence package ${pkg.package_id}`, {
+        description: `${pkg.artefacts.length} artefacts · ${pkg.claims.length} claims · Ed25519 signed · legal effect: none`,
+      });
+    } catch {
+      toast.error("Export failed");
+    } finally {
+      setExporting(false);
+    }
+  }
 
   const passed = data?.invariants.filter((i) => i.passed).length ?? 0;
   const total = data?.invariants.length ?? 0;
@@ -53,6 +79,21 @@ export default function FreezePage() {
           className="rounded border border-border px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-muted-foreground transition-colors duration-150 hover:border-foreground/30 hover:text-foreground"
         >
           Freeze report v1.1
+        </Link>
+        <button
+          onClick={downloadPackage}
+          disabled={exporting}
+          data-testid="freeze-export-button"
+          className="rounded border border-emerald-700 bg-emerald-950/40 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-emerald-300 transition-colors duration-150 hover:bg-emerald-900/50 disabled:opacity-50"
+        >
+          {exporting ? "Signing…" : "Download signed evidence package"}
+        </button>
+        <Link
+          to="/drift"
+          data-testid="freeze-open-drift"
+          className="rounded border border-border px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-muted-foreground transition-colors duration-150 hover:border-foreground/30 hover:text-foreground"
+        >
+          Drift control
         </Link>
         <Link
           to="/decisions"

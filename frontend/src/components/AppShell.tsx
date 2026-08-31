@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { Link, NavLink, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { apiGet } from "@/lib/api";
+import { InvariantAlert } from "@/components/InvariantAlert";
 import type { DocTree } from "@/lib/types";
 import { StatusBadge } from "./StatusBadge";
 
@@ -14,6 +15,8 @@ const NAV = [
   { to: "/registry/ecosystem", label: "Registries", testId: "nav-registries" },
   { to: "/graph", label: "Traceability", testId: "nav-graph" },
   { to: "/kiltikonet", label: "Kiltikonet", testId: "nav-kiltikonet" },
+  { to: "/systems", label: "System Cards", testId: "nav-systems" },
+  { to: "/drift", label: "Drift Control", testId: "nav-drift" },
   { to: "/architecture", label: "Current vs Target", testId: "nav-architecture" },
   { to: "/search", label: "Search", testId: "nav-search" },
 ];
@@ -48,6 +51,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <InvariantAlert />
       <header className="sticky top-0 z-50 flex h-14 w-full items-center gap-4 border-b border-border bg-background/95 px-4 backdrop-blur">
         <Link to="/" data-testid="brand-home-link" className="flex items-baseline gap-2.5">
           <span className="font-mono text-[13px] font-semibold tracking-[0.16em] text-foreground">

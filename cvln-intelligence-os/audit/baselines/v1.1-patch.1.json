@@ -1,0 +1,672 @@
+{
+ "created": "2026-08-31T12:38:31+00:00",
+ "id": "v1.1-patch.1",
+ "label": "OS v1.1 + PATCH-001-KILTIKONET",
+ "provenance": "snapshot of the Markdown corpus after PATCH-001-KILTIKONET",
+ "rows": {
+  "component:ADL v1": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "component:ADL v2": {
+   "adr": "",
+   "status": "DEFINED"
+  },
+  "component:Adaptive Runtime State": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "component:Agent Lifecycle Runtime": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "component:Agent Protocol handshake": {
+   "adr": "",
+   "status": "PROPOSED"
+  },
+  "component:Autonomy Controller": {
+   "adr": "",
+   "status": "PARTIAL"
+  },
+  "component:Billing": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "component:Brain Agents": {
+   "adr": "",
+   "status": "PARTIAL"
+  },
+  "component:Brain Interface": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "component:Brain Persona": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "component:Capability Discovery": {
+   "adr": "",
+   "status": "PARTIAL"
+  },
+  "component:Cognitive Engine": {
+   "adr": "",
+   "status": "PARTIAL"
+  },
+  "component:Constitution Service": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "component:Continuity & Closing": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "component:Cross-repo observability": {
+   "adr": "",
+   "status": "PROPOSED"
+  },
+  "component:Decision System": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "component:Doctrine Engine": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "component:Echo Pipeline": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "component:Embeddable Widget": {
+   "adr": "",
+   "status": "PROPOSED"
+  },
+  "component:Encryption at Rest": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "component:Entity Registry": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "component:External Bridges": {
+   "adr": "",
+   "status": "PARTIAL"
+  },
+  "component:Factory Event Bus": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "component:Gate System": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "component:Ghost Persistence": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "component:Governance API": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "component:ISA instruction set": {
+   "adr": "",
+   "status": "PROPOSED"
+  },
+  "component:Identity & RBAC": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "component:Inter-system Contracts": {
+   "adr": "",
+   "status": "DEFINED"
+  },
+  "component:Laurentia Gateway": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "component:Laurentia Orchestrator": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "component:Layered Memory": {
+   "adr": "",
+   "status": "PARTIAL"
+  },
+  "component:Learning Loop": {
+   "adr": "",
+   "status": "PARTIAL"
+  },
+  "component:MCL language": {
+   "adr": "",
+   "status": "PROPOSED"
+  },
+  "component:Model Router": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "component:Model training infrastructure": {
+   "adr": "",
+   "status": "UNKNOWN"
+  },
+  "component:Notary & Public Audit": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "component:Outbound Adapters": {
+   "adr": "",
+   "status": "PARTIAL"
+  },
+  "component:Python SDK": {
+   "adr": "",
+   "status": "PROPOSED"
+  },
+  "component:RGPD Purge": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "component:Signed Event Bus": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "component:Signed PDF Export": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "component:Sovereign Brain Core": {
+   "adr": "",
+   "status": "PRIVATE / NOT VISIBLE"
+  },
+  "component:Sovereign Provider": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "component:Unified Memory Graph": {
+   "adr": "",
+   "status": "PROPOSED"
+  },
+  "continuity:K-001": {
+   "adr": "",
+   "status": "TARGET"
+  },
+  "continuity:K-002": {
+   "adr": "",
+   "status": "PARTIAL"
+  },
+  "continuity:K-003": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "continuity:K-004": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "continuity:K-005": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "continuity:K-006": {
+   "adr": "",
+   "status": "TARGET"
+  },
+  "continuity:K-007": {
+   "adr": "",
+   "status": "TARGET"
+  },
+  "continuity:K-008": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "continuity:K-009": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "continuity:K-010": {
+   "adr": "",
+   "status": "PARTIAL"
+  },
+  "continuity:K-011": {
+   "adr": "",
+   "status": "TARGET"
+  },
+  "decisions:D-001": {
+   "adr": "Evidence first",
+   "status": "DECIDED"
+  },
+  "decisions:D-002": {
+   "adr": "CURRENT is not TARGET",
+   "status": "DECIDED"
+  },
+  "decisions:D-003": {
+   "adr": "Human authority is final",
+   "status": "DECIDED"
+  },
+  "decisions:D-004": {
+   "adr": "Markdown is the only canonical store",
+   "status": "DECIDED"
+  },
+  "decisions:D-005": {
+   "adr": "Append-only baseline",
+   "status": "DECIDED"
+  },
+  "decisions:D-006": {
+   "adr": "Resilience is a first-class dimension",
+   "status": "DECIDED"
+  },
+  "decisions:D-007": {
+   "adr": "Proof layer is digital evidence only",
+   "status": "DECIDED"
+  },
+  "decisions:D-008": {
+   "adr": "JCC is an internal accounting unit",
+   "status": "DECIDED"
+  },
+  "decisions:D-009": {
+   "adr": "Legal-by-design bounds the design space",
+   "status": "DECIDED"
+  },
+  "decisions:D-010": {
+   "adr": "Zero-trust between layers",
+   "status": "DECIDED"
+  },
+  "decisions:D-011": {
+   "adr": "Doctrine ownership is contested and frozen as a contradiction",
+   "status": "DECIDED"
+  },
+  "decisions:D-012": {
+   "adr": "One status per row",
+   "status": "DECIDED"
+  },
+  "decisions:D-013": {
+   "adr": "Traceability is mandatory",
+   "status": "DECIDED"
+  },
+  "decisions:D-014": {
+   "adr": "Freeze is verifiable by machine",
+   "status": "DECIDED"
+  },
+  "decisions:D-015": {
+   "adr": "Kiltikonet is a layer-4 system of the estate with an unattested legal identity",
+   "status": "DECIDED"
+  },
+  "decisions:D-016": {
+   "adr": "The Kiltikonet jeton is not reconciled with JCC by this patch",
+   "status": "DECIDED"
+  },
+  "decisions:D-017": {
+   "adr": "Absence of evidence of integration is recorded as UNKNOWN, never as absence of relation",
+   "status": "DECIDED"
+  },
+  "decisions:D-018": {
+   "adr": "Estate governance does not currently reach Kiltikonet",
+   "status": "DECIDED"
+  },
+  "decisions:D-019": {
+   "adr": "Baseline snapshots and evidence-package export are derived artefacts",
+   "status": "IMPLEMENTED"
+  },
+  "ecosystem:CVLN Academy": {
+   "adr": "",
+   "status": "UNKNOWN"
+  },
+  "ecosystem:CVLN Agent Factory": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "ecosystem:CVLN Brain": {
+   "adr": "",
+   "status": "TARGET"
+  },
+  "ecosystem:Culture Connect 2026": {
+   "adr": "",
+   "status": "OBSERVED"
+  },
+  "ecosystem:FREKCORE": {
+   "adr": "",
+   "status": "UNKNOWN"
+  },
+  "ecosystem:Factory Maker Studio (EURL)": {
+   "adr": "",
+   "status": "OBSERVED"
+  },
+  "ecosystem:KORA": {
+   "adr": "",
+   "status": "REFERENCED"
+  },
+  "ecosystem:Kiltikonet": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "ecosystem:LabelOS": {
+   "adr": "",
+   "status": "REFERENCED"
+  },
+  "ecosystem:Laurentia": {
+   "adr": "",
+   "status": "PARTIAL"
+  },
+  "ecosystem:MetaCVLN": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "ecosystem:Proof Layer": {
+   "adr": "",
+   "status": "PARTIAL"
+  },
+  "ecosystem:Wallet": {
+   "adr": "",
+   "status": "REFERENCED"
+  },
+  "kiltikonet-contradictions:KC-001": {
+   "adr": "D-016",
+   "status": "OPEN"
+  },
+  "kiltikonet-contradictions:KC-002": {
+   "adr": "D-016",
+   "status": "OPEN"
+  },
+  "kiltikonet-contradictions:KC-003": {
+   "adr": "D-015",
+   "status": "OPEN"
+  },
+  "kiltikonet-contradictions:KC-004": {
+   "adr": "D-017",
+   "status": "OPEN"
+  },
+  "kiltikonet-contradictions:KC-005": {
+   "adr": "D-018",
+   "status": "OPEN"
+  },
+  "kiltikonet-contradictions:KC-006": {
+   "adr": "D-018",
+   "status": "OPEN"
+  },
+  "kiltikonet-data:KD-001": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "kiltikonet-data:KD-002": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "kiltikonet-data:KD-003": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "kiltikonet-data:KD-004": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "kiltikonet-data:KD-005": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "kiltikonet-data:KD-006": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "kiltikonet-data:KD-007": {
+   "adr": "",
+   "status": "UNKNOWN"
+  },
+  "kiltikonet-data:KD-008": {
+   "adr": "",
+   "status": "UNKNOWN"
+  },
+  "kiltikonet-data:KD-009": {
+   "adr": "",
+   "status": "TARGET"
+  },
+  "kiltikonet-data:KD-010": {
+   "adr": "",
+   "status": "HISTORICAL"
+  },
+  "kiltikonet-identity:KI-001": {
+   "adr": "",
+   "status": "OBSERVED"
+  },
+  "kiltikonet-identity:KI-002": {
+   "adr": "",
+   "status": "OBSERVED"
+  },
+  "kiltikonet-identity:KI-003": {
+   "adr": "",
+   "status": "OBSERVED"
+  },
+  "kiltikonet-identity:KI-004": {
+   "adr": "",
+   "status": "OBSERVED"
+  },
+  "kiltikonet-identity:KI-005": {
+   "adr": "",
+   "status": "OBSERVED"
+  },
+  "kiltikonet-identity:KI-006": {
+   "adr": "",
+   "status": "UNKNOWN"
+  },
+  "kiltikonet-identity:KI-007": {
+   "adr": "",
+   "status": "UNKNOWN"
+  },
+  "kiltikonet-identity:KI-008": {
+   "adr": "",
+   "status": "UNKNOWN"
+  },
+  "kiltikonet-programmes:KP-001": {
+   "adr": "",
+   "status": "OBSERVED"
+  },
+  "kiltikonet-programmes:KP-002": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "kiltikonet-programmes:KP-003": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "kiltikonet-programmes:KP-004": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "kiltikonet-programmes:KP-005": {
+   "adr": "",
+   "status": "IMPLEMENTED"
+  },
+  "kiltikonet-programmes:KP-006": {
+   "adr": "",
+   "status": "UNKNOWN"
+  },
+  "kiltikonet-programmes:KP-007": {
+   "adr": "",
+   "status": "UNKNOWN"
+  },
+  "kiltikonet-programmes:KP-008": {
+   "adr": "",
+   "status": "UNKNOWN"
+  },
+  "kiltikonet-programmes:KP-009": {
+   "adr": "",
+   "status": "UNKNOWN"
+  },
+  "kiltikonet-programmes:KP-010": {
+   "adr": "",
+   "status": "UNKNOWN"
+  },
+  "kiltikonet-programmes:KP-011": {
+   "adr": "",
+   "status": "UNKNOWN"
+  },
+  "kiltikonet-programmes:KP-012": {
+   "adr": "",
+   "status": "UNKNOWN"
+  },
+  "kiltikonet-programmes:KP-013": {
+   "adr": "",
+   "status": "UNKNOWN"
+  },
+  "kiltikonet-relations:KR-001": {
+   "adr": "D-015",
+   "status": "IMPLEMENTED"
+  },
+  "kiltikonet-relations:KR-002": {
+   "adr": "D-015",
+   "status": "PARTIAL"
+  },
+  "kiltikonet-relations:KR-003": {
+   "adr": "D-016",
+   "status": "IMPLEMENTED"
+  },
+  "kiltikonet-relations:KR-004": {
+   "adr": "D-017",
+   "status": "PARTIAL"
+  },
+  "kiltikonet-relations:KR-005": {
+   "adr": "none",
+   "status": "IMPLEMENTED"
+  },
+  "kiltikonet-relations:KR-006": {
+   "adr": "none",
+   "status": "IMPLEMENTED"
+  },
+  "kiltikonet-relations:KR-007": {
+   "adr": "none",
+   "status": "IMPLEMENTED"
+  },
+  "kiltikonet-relations:KR-008": {
+   "adr": "D-017",
+   "status": "UNKNOWN"
+  },
+  "kiltikonet-relations:KR-009": {
+   "adr": "D-017",
+   "status": "UNKNOWN"
+  },
+  "kiltikonet-relations:KR-010": {
+   "adr": "D-017",
+   "status": "UNKNOWN"
+  },
+  "kiltikonet-relations:KR-011": {
+   "adr": "D-017",
+   "status": "UNKNOWN"
+  },
+  "kiltikonet-relations:KR-012": {
+   "adr": "D-017",
+   "status": "UNKNOWN"
+  },
+  "kiltikonet-relations:KR-013": {
+   "adr": "D-017",
+   "status": "UNKNOWN"
+  },
+  "kiltikonet-relations:KR-014": {
+   "adr": "D-015",
+   "status": "OBSERVED"
+  },
+  "kiltikonet-relations:KR-015": {
+   "adr": "D-015",
+   "status": "OBSERVED"
+  },
+  "kiltikonet-relations:KR-016": {
+   "adr": "D-017",
+   "status": "UNKNOWN"
+  },
+  "kiltikonet-relations:KR-017": {
+   "adr": "D-015",
+   "status": "DECIDED"
+  },
+  "legal:L-001": {
+   "adr": "D-009",
+   "status": "TARGET"
+  },
+  "legal:L-002": {
+   "adr": "D-003",
+   "status": "PARTIAL"
+  },
+  "legal:L-003": {
+   "adr": "D-007",
+   "status": "PARTIAL"
+  },
+  "legal:L-004": {
+   "adr": "D-007",
+   "status": "TARGET"
+  },
+  "legal:L-005": {
+   "adr": "D-008",
+   "status": "TARGET"
+  },
+  "legal:L-006": {
+   "adr": "D-009",
+   "status": "TARGET"
+  },
+  "legal:L-007": {
+   "adr": "D-009",
+   "status": "TARGET"
+  },
+  "legal:L-008": {
+   "adr": "D-015",
+   "status": "OPEN"
+  },
+  "legal:L-009": {
+   "adr": "D-016",
+   "status": "OPEN"
+  },
+  "legal:L-010": {
+   "adr": "D-018",
+   "status": "TARGET"
+  },
+  "legal:L-011": {
+   "adr": "D-015",
+   "status": "OPEN"
+  },
+  "vulnerability:V-001": {
+   "adr": "D-010",
+   "status": "OBSERVED"
+  },
+  "vulnerability:V-002": {
+   "adr": "D-010",
+   "status": "OBSERVED"
+  },
+  "vulnerability:V-003": {
+   "adr": "D-010",
+   "status": "OBSERVED"
+  },
+  "vulnerability:V-004": {
+   "adr": "D-002",
+   "status": "OBSERVED"
+  },
+  "vulnerability:V-005": {
+   "adr": "D-010",
+   "status": "OBSERVED"
+  },
+  "vulnerability:V-006": {
+   "adr": "D-010",
+   "status": "OBSERVED"
+  },
+  "vulnerability:V-007": {
+   "adr": "D-006",
+   "status": "TARGET"
+  },
+  "vulnerability:V-008": {
+   "adr": "D-007",
+   "status": "TARGET"
+  },
+  "vulnerability:V-009": {
+   "adr": "D-010",
+   "status": "OBSERVED"
+  },
+  "vulnerability:V-010": {
+   "adr": "D-010",
+   "status": "OBSERVED"
+  },
+  "vulnerability:V-011": {
+   "adr": "D-018",
+   "status": "OBSERVED"
+  },
+  "vulnerability:V-012": {
+   "adr": "D-006",
+   "status": "OBSERVED"
+  },
+  "vulnerability:V-013": {
+   "adr": "D-019",
+   "status": "OBSERVED"
+  }
+ }
+}

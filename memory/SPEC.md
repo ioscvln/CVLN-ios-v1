@@ -164,3 +164,43 @@ audit report and patch record.
   Kiltikonet today (D-018).
 - Historical snapshot counters (48 badges, 30 registered, 20 scans…) are `HISTORICAL`
   and never rendered as live KPIs.
+
+---
+
+## PATCH-002-GOVERNANCE-TOOLING (v1.1-patch.2) — drift, export, system cards, alert
+
+Corpus: **147 documents**. Traced by `decisions/ADR-0019-D-019.md`, recorded in
+`audit/DRIFT-CONTROL.md` and in `audit/freeze-manifest.yaml` (`post_freeze_patches`).
+`proof/EVIDENCE-PACKAGE.md` moved `TARGET` → `PARTIAL` (traced edit); vulnerability
+V-013 registered (export signing key unencrypted at rest).
+
+### Drift control
+- `scripts/snapshot_baseline.py` writes derived snapshots to
+  `cvln-intelligence-os/audit/baselines/{v1.1,v1.1-patch.1}.json` (regenerable, never a
+  second source of truth). `v1.1` excludes the rows the patch records document as
+  post-freeze additions.
+- `GET /api/docs/baselines`, `GET /api/docs/drift?base=<id>&target=<id|current>` (404 on
+  unknown baseline). Semantics: in-place promotion without decision reference = **freeze
+  violation**; new row with strong status and no reference = **advisory**. Status
+  strength ranking in `backend/lib/baselines.py`.
+- Portal `/drift` (nav "Drift Control"): base/target selectors, verdict banner, 5 stats,
+  lenses all/violations/advisories/added. Current state: 0 violations, 24 advisories.
+
+### Signed evidence-package export
+- `GET /api/docs/export/{baseline}` → EvidencePackage: SHA-256 per corpus document (148
+  artefacts), invariant verdicts as claims, `chain_hash`, **Ed25519** signature, public
+  key, `anchored_at: null`, `legal_effect: "none"`, verification instructions.
+- Key file path from `EXPORT_SIGNING_KEY_PATH` (default `/app/backend/.keys/`), created
+  on first use, 0600. Verified independently: artefact hashes + chain + signature check.
+- Button on `/freeze` downloads `EP-<baseline>-<hash>.json` (sonner toast; `Toaster`
+  mounted in `main.tsx`).
+
+### System cards
+`GET /api/docs/systems` (13 systems with component/vulnerability/decision counts) and
+`GET /api/docs/system/{name}` (404 on unknown). Portal `/systems` + `/system/:name`:
+identity, components, vulnerabilities, decisions, declared relations, documents.
+
+### Global invariant alert
+`frontend/src/components/InvariantAlert.tsx` mounted in `AppShell`: sticky red banner on
+every page whenever `/api/docs/freeze` reports a failed invariant (verified by
+temporarily introducing a broken link → INV-013 violated → banner shown, then removed).

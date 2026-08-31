@@ -34,6 +34,7 @@ api_router = APIRouter(prefix="/api")
 
 from routers import docs as docs_router
 from routers import freeze as freeze_router
+from routers import insight as insight_router
 
 
 # Define Models
@@ -64,6 +65,7 @@ async def get_status_checks():
 
 api_router.include_router(docs_router.router)
 api_router.include_router(freeze_router.router)
+api_router.include_router(insight_router.router)
 
 # Include the router in the main app
 app.include_router(api_router)

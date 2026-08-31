@@ -4,13 +4,13 @@ purpose: Specification of the evidence package artefact.
 ownership: CVLN Group — Office of the Principal Systems Architect
 scope: proof/
 version: 1.1
-status: TARGET
+status: PARTIAL
 attribution: SPECIFICATION
 ---
 
-# EvidencePackage — TARGET
+# EvidencePackage — PARTIAL
 
-> Specification only. No implementation of this artefact was observed.
+> Status changed from `TARGET` to `PARTIAL` by `decisions/ADR-0019-D-019.md`: the portal now emits signed packages at `GET /api/docs/export/{baseline}`. External anchoring remains absent (V-008), and `IMPLEMENTED` does not imply `VERIFIED`.
 
 ## Fields
 

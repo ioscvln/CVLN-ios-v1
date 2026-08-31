@@ -35,6 +35,7 @@ observed.
 | D-016 | The Kiltikonet jeton is not reconciled with JCC by this patch | One source calls it a digital currency, D-008 forbids that reading; the conflict is recorded, not resolved | ECONOMIC | kiltikonet/CONTRADICTIONS-KILTIKONET.md | DECIDED | economics/, kiltikonet/ | ADR-0016 |
 | D-017 | Absence of evidence of integration is recorded as UNKNOWN, never as absence of relation | Ecosystem membership never implies a technical integration | ARCHITECTURE | kiltikonet/RELATIONS-REGISTRY.md | DECIDED | kiltikonet/ | ADR-0017 |
 | D-018 | Estate governance does not currently reach Kiltikonet | No OS integration is observed; governance coverage is a TARGET, not a fact | GOVERNANCE | relations KR-008, KR-009, KR-016 | DECIDED | kiltikonet/, registry/ | ADR-0018 |
+| D-019 | Baseline snapshots and evidence-package export are derived artefacts | Snapshots and packages are recomputed from the Markdown corpus; they never become a second source of truth | ARCHITECTURE | backend/lib/baselines.py, backend/routers/insight.py | IMPLEMENTED | proof/, audit/baselines/ | ADR-0019 |
 
 
 ## Status vocabulary (canonical, v1.1)

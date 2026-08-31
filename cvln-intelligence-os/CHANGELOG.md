@@ -63,3 +63,10 @@ text is unchanged; this patch is not part of the original freeze.
 - Added decisions D-015…D-018 with ADRs, and invariants INV-009…INV-014.
 - Appended rows to the ecosystem, vulnerability, continuity, legal and decision
   registries. No v1.0 document was touched.
+
+## v1.1-patch.2 — PATCH-002-GOVERNANCE-TOOLING (post-freeze tooling patch)
+
+- Added drift control (`audit/DRIFT-CONTROL.md`, baselines in `audit/baselines/`),
+  signed evidence-package export, and per-system cards in the portal.
+- Added decision D-019 with `decisions/ADR-0019-D-019.md`, vulnerability V-013.
+- `proof/EVIDENCE-PACKAGE.md` moved TARGET → PARTIAL, traced by ADR-0019.
